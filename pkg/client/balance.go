@@ -47,7 +47,10 @@ func (c *capmonsterClient) GetBalance() (float64, error) {
 	}
 
 	if respPayload.ErrorId != 0 {
-		return 0, fmt.Errorf("%v", respPayload.ErrorCode)
+		if err, ok := errMap[respPayload.ErrorCode]; ok {
+			return 0, err
+		}
+		return 0, errUnknown
 	}
 
 	return respPayload.Balance, nil
