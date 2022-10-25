@@ -11,7 +11,10 @@ type imageToTextTask struct {
 }
 
 func NewImageToTextTask(body string) imageToTextTask {
-	return imageToTextTask{Type: "ImageToTextTask", Body: body}
+	return imageToTextTask{
+		Type: "ImageToTextTask",
+		Body: body,
+	}
 }
 
 func (t imageToTextTask) WithCapMonsterModule(capMonsterModule string) imageToTextTask {
