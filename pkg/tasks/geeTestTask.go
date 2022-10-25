@@ -47,3 +47,9 @@ func NewGeeTestTask(websiteURL, gt, challenge, proxyType, proxyAddress string, p
 		},
 	}
 }
+
+type GeeTestTaskResult struct {
+	Challenge string `json:"challenge"`
+	Validate  string `json:"validate"`
+	Seccode   string `json:"seccode"`
+}

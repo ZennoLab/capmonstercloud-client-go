@@ -46,3 +46,7 @@ func NewRecaptchaV2EnterpriseTask(websiteURL, websiteKey, proxyType, proxyAddres
 		},
 	}
 }
+
+type RecaptchaV2EnterpriseTaskResult struct {
+	GRecaptchaResponse string `json:"gRecaptchaResponse"`
+}

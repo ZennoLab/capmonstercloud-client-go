@@ -21,3 +21,7 @@ func (t RecaptchaV3TaskProxyless) WithPageAction(pageAction string) RecaptchaV3T
 	t.PageAction = &pageAction
 	return t
 }
+
+type RecaptchaV3TaskTaskResult struct {
+	GRecaptchaResponse string `json:"gRecaptchaResponse"`
+}

@@ -41,3 +41,7 @@ func (t ImageToTextTask) WithMath(math bool) ImageToTextTask {
 	t.Math = &math
 	return t
 }
+
+type ImageToTextTaskResult struct {
+	Text string `json:"text"`
+}

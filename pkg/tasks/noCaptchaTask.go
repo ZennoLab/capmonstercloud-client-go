@@ -43,3 +43,7 @@ func NewNoCaptchaTask(websiteURL, websiteKey, proxyType, proxyAddress string, pr
 		},
 	}
 }
+
+type NoCaptchaTaskResult struct {
+	GRecaptchaResponse string `json:"gRecaptchaResponse"`
+}

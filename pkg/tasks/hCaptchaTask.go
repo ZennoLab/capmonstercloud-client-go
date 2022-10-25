@@ -49,3 +49,7 @@ func NewHCaptchaTask(websiteURL, websiteKey, proxyType, proxyAddress string, pro
 		},
 	}
 }
+
+type HCaptchaTaskResult struct {
+	GRecaptchaResponse string `json:"gRecaptchaResponse"`
+}

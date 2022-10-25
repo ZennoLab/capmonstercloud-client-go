@@ -49,3 +49,7 @@ func NewFunCaptchaTask(websiteURL, websitePublicKey, proxyType, proxyAddress, us
 		},
 	}
 }
+
+type FunCaptchaTaskResult struct {
+	Token string `json:"Token"`
+}
