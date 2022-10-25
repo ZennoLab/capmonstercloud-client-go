@@ -25,7 +25,7 @@ func (c *capmonsterClient) GetBalance() (float64, error) {
 	}
 
 	bodyReader := bytes.NewReader(body)
-	req, err := http.NewRequest("POST", "https://api.capmonster.cloud/getBalance", bodyReader)
+	req, err := http.NewRequest("POST", getBalanceUrl, bodyReader)
 	if err != nil {
 		return 0, fmt.Errorf("create http request: %w", err)
 	}

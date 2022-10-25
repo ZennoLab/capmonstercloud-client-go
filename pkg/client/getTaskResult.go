@@ -85,7 +85,7 @@ func (c *capmonsterClient) GetTaskResult(taskId int, result interface{}) error {
 	}
 
 	bodyReader := bytes.NewReader(body)
-	req, err := http.NewRequest("POST", "https://api.capmonster.cloud/getTaskResult/", bodyReader)
+	req, err := http.NewRequest("POST", getTaskResultUrl, bodyReader)
 	if err != nil {
 		return fmt.Errorf("create http request: %w", err)
 	}

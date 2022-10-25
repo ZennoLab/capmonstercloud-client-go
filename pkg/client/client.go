@@ -5,6 +5,12 @@ import (
 	"time"
 )
 
+const (
+	getBalanceUrl    = "https://api.capmonster.cloud/getBalance"
+	createTaskUrl    = "https://api.capmonster.cloud/createTask"
+	getTaskResultUrl = "https://api.capmonster.cloud/getTaskResult/"
+)
+
 type capmonsterClient struct {
 	httpClient http.Client
 	clientKey  string

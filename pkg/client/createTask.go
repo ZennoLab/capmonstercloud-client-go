@@ -79,7 +79,7 @@ func (c *capmonsterClient) sendTask(task any) (int, error) {
 	}
 
 	bodyReader := bytes.NewReader(body)
-	req, err := http.NewRequest("POST", "https://api.capmonster.cloud/createTask", bodyReader)
+	req, err := http.NewRequest("POST", createTaskUrl, bodyReader)
 	if err != nil {
 		return 0, fmt.Errorf("create http request: %w", err)
 	}
