@@ -10,57 +10,58 @@ import (
 	"github.com/tandem97/capmonstercloud-client-go/pkg/tasks"
 )
 
-func (c *capmonsterClient) SendImageToTextTask(task tasks.ImageToTextTask) (int, error) {
-	return c.sendTask(task)
+func (c *capmonsterClient) SendImageToTextTask(task tasks.ImageToTextTask, callbackUrl *string) (int, error) {
+	return c.sendTask(task, callbackUrl)
 }
 
-func (c *capmonsterClient) SendNoCaptchaTaskProxyless(task tasks.NoCaptchaTaskProxyless) (int, error) {
-	return c.sendTask(task)
+func (c *capmonsterClient) SendNoCaptchaTaskProxyless(task tasks.NoCaptchaTaskProxyless, callbackUrl *string) (int, error) {
+	return c.sendTask(task, callbackUrl)
 }
 
-func (c *capmonsterClient) SendNoCaptchaTask(task tasks.NoCaptchaTask) (int, error) {
-	return c.sendTask(task)
+func (c *capmonsterClient) SendNoCaptchaTask(task tasks.NoCaptchaTask, callbackUrl *string) (int, error) {
+	return c.sendTask(task, callbackUrl)
 }
 
-func (c *capmonsterClient) SendRecaptchaV3TaskProxyless(task tasks.RecaptchaV3TaskProxyless) (int, error) {
-	return c.sendTask(task)
+func (c *capmonsterClient) SendRecaptchaV3TaskProxyless(task tasks.RecaptchaV3TaskProxyless, callbackUrl *string) (int, error) {
+	return c.sendTask(task, callbackUrl)
 }
 
-func (c *capmonsterClient) SendRecaptchaV2EnterpriseTask(task tasks.RecaptchaV2EnterpriseTask) (int, error) {
-	return c.sendTask(task)
+func (c *capmonsterClient) SendRecaptchaV2EnterpriseTask(task tasks.RecaptchaV2EnterpriseTask, callbackUrl *string) (int, error) {
+	return c.sendTask(task, callbackUrl)
 }
 
-func (c *capmonsterClient) SendRecaptchaV2EnterpriseTaskProxyless(task tasks.RecaptchaV2EnterpriseTaskProxyless) (int, error) {
-	return c.sendTask(task)
+func (c *capmonsterClient) SendRecaptchaV2EnterpriseTaskProxyless(task tasks.RecaptchaV2EnterpriseTaskProxyless, callbackUrl *string) (int, error) {
+	return c.sendTask(task, callbackUrl)
 }
 
-func (c *capmonsterClient) SendFunCaptchaTask(task tasks.FunCaptchaTask) (int, error) {
-	return c.sendTask(task)
+func (c *capmonsterClient) SendFunCaptchaTask(task tasks.FunCaptchaTask, callbackUrl *string) (int, error) {
+	return c.sendTask(task, callbackUrl)
 }
 
-func (c *capmonsterClient) SendFunCaptchaTaskProxyless(task tasks.FunCaptchaTaskProxyless) (int, error) {
-	return c.sendTask(task)
+func (c *capmonsterClient) SendFunCaptchaTaskProxyless(task tasks.FunCaptchaTaskProxyless, callbackUrl *string) (int, error) {
+	return c.sendTask(task, callbackUrl)
 }
 
-func (c *capmonsterClient) SendHCaptchaTask(task tasks.HCaptchaTask) (int, error) {
-	return c.sendTask(task)
+func (c *capmonsterClient) SendHCaptchaTask(task tasks.HCaptchaTask, callbackUrl *string) (int, error) {
+	return c.sendTask(task, callbackUrl)
 }
 
-func (c *capmonsterClient) SendHCaptchaTaskProxyless(task tasks.FunCaptchaTaskProxyless) (int, error) {
-	return c.sendTask(task)
+func (c *capmonsterClient) SendHCaptchaTaskProxyless(task tasks.FunCaptchaTaskProxyless, callbackUrl *string) (int, error) {
+	return c.sendTask(task, callbackUrl)
 }
 
-func (c *capmonsterClient) SendGeeTestTask(task tasks.GeeTestTask) (int, error) {
-	return c.sendTask(task)
+func (c *capmonsterClient) SendGeeTestTask(task tasks.GeeTestTask, callbackUrl *string) (int, error) {
+	return c.sendTask(task, callbackUrl)
 }
 
-func (c *capmonsterClient) SendGeeTestTaskProxyless(task tasks.GeeTestTaskProxyless) (int, error) {
-	return c.sendTask(task)
+func (c *capmonsterClient) SendGeeTestTaskProxyless(task tasks.GeeTestTaskProxyless, callbackUrl *string) (int, error) {
+	return c.sendTask(task, callbackUrl)
 }
 
 type createTaskRequestPayload struct {
-	ClientKey string      `json:"clientKey"`
-	Task      interface{} `json:"task"`
+	ClientKey   string      `json:"clientKey"`
+	Task        interface{} `json:"task"`
+	CallbackUrl *string     `json:"callbackUrl,omitempty"`
 }
 
 type createTaskRequestResponsePayload struct {
@@ -69,10 +70,11 @@ type createTaskRequestResponsePayload struct {
 	TaskId    int    `json:"taskId"`
 }
 
-func (c *capmonsterClient) sendTask(task interface{}) (int, error) {
+func (c *capmonsterClient) sendTask(task interface{}, callbackUrl *string) (int, error) {
 	body, err := json.Marshal(createTaskRequestPayload{
-		ClientKey: c.clientKey,
-		Task:      task,
+		ClientKey:   c.clientKey,
+		Task:        task,
+		CallbackUrl: callbackUrl,
 	})
 	if err != nil {
 		return 0, fmt.Errorf("marshal payload for request: %w", err)
