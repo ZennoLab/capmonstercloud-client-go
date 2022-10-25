@@ -6,57 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-
-	"github.com/tandem97/capmonstercloud-client-go/pkg/tasks"
 )
-
-func (c *capmonsterClient) createImageToTextTask(task tasks.ImageToTextTask, callbackUrl *string) (int, error) {
-	return c.createTask(task, callbackUrl)
-}
-
-func (c *capmonsterClient) createNoCaptchaTaskProxyless(task tasks.NoCaptchaTaskProxyless, callbackUrl *string) (int, error) {
-	return c.createTask(task, callbackUrl)
-}
-
-func (c *capmonsterClient) createNoCaptchaTask(task tasks.NoCaptchaTask, callbackUrl *string) (int, error) {
-	return c.createTask(task, callbackUrl)
-}
-
-func (c *capmonsterClient) createRecaptchaV3TaskProxyless(task tasks.RecaptchaV3TaskProxyless, callbackUrl *string) (int, error) {
-	return c.createTask(task, callbackUrl)
-}
-
-func (c *capmonsterClient) createRecaptchaV2EnterpriseTask(task tasks.RecaptchaV2EnterpriseTask, callbackUrl *string) (int, error) {
-	return c.createTask(task, callbackUrl)
-}
-
-func (c *capmonsterClient) createRecaptchaV2EnterpriseTaskProxyless(task tasks.RecaptchaV2EnterpriseTaskProxyless, callbackUrl *string) (int, error) {
-	return c.createTask(task, callbackUrl)
-}
-
-func (c *capmonsterClient) createFunCaptchaTask(task tasks.FunCaptchaTask, callbackUrl *string) (int, error) {
-	return c.createTask(task, callbackUrl)
-}
-
-func (c *capmonsterClient) createFunCaptchaTaskProxyless(task tasks.FunCaptchaTaskProxyless, callbackUrl *string) (int, error) {
-	return c.createTask(task, callbackUrl)
-}
-
-func (c *capmonsterClient) createHCaptchaTask(task tasks.HCaptchaTask, callbackUrl *string) (int, error) {
-	return c.createTask(task, callbackUrl)
-}
-
-func (c *capmonsterClient) createHCaptchaTaskProxyless(task tasks.FunCaptchaTaskProxyless, callbackUrl *string) (int, error) {
-	return c.createTask(task, callbackUrl)
-}
-
-func (c *capmonsterClient) createGeeTestTask(task tasks.GeeTestTask, callbackUrl *string) (int, error) {
-	return c.createTask(task, callbackUrl)
-}
-
-func (c *capmonsterClient) createGeeTestTaskProxyless(task tasks.GeeTestTaskProxyless, callbackUrl *string) (int, error) {
-	return c.createTask(task, callbackUrl)
-}
 
 type createTaskRequestPayload struct {
 	ClientKey   string      `json:"clientKey"`
