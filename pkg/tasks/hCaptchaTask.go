@@ -1,6 +1,6 @@
 package tasks
 
-type hCaptchaTaskProxyless struct {
+type HCaptchaTaskProxyless struct {
 	Type        string  `json:"type"`
 	WebsiteURL  string  `json:"websiteURL"`
 	WebsiteKey  string  `json:"websiteKey"`
@@ -9,8 +9,8 @@ type hCaptchaTaskProxyless struct {
 	userAgentAndCookies
 }
 
-func NewHCaptchaTaskProxyless(websiteURL, websiteKey, userAgent string) hCaptchaTaskProxyless {
-	return hCaptchaTaskProxyless{
+func NewHCaptchaTaskProxyless(websiteURL, websiteKey, userAgent string) HCaptchaTaskProxyless {
+	return HCaptchaTaskProxyless{
 		Type:       "HCaptchaTaskProxyless",
 		WebsiteURL: websiteURL,
 		WebsiteKey: websiteKey,
@@ -20,24 +20,24 @@ func NewHCaptchaTaskProxyless(websiteURL, websiteKey, userAgent string) hCaptcha
 	}
 }
 
-func (t hCaptchaTaskProxyless) WithIsInvisible(isInvisible bool) hCaptchaTaskProxyless {
+func (t HCaptchaTaskProxyless) WithIsInvisible(isInvisible bool) HCaptchaTaskProxyless {
 	t.IsInvisible = &isInvisible
 	return t
 }
 
-func (t hCaptchaTaskProxyless) WithData(data string) hCaptchaTaskProxyless {
+func (t HCaptchaTaskProxyless) WithData(data string) HCaptchaTaskProxyless {
 	t.Data = &data
 	return t
 }
 
-type hCaptchaTask struct {
-	hCaptchaTaskProxyless
+type HCaptchaTask struct {
+	HCaptchaTaskProxyless
 	taskProxy
 }
 
-func NewHCaptchaTask(websiteURL, websiteKey, proxyType, proxyAddress string, proxyPort int) hCaptchaTask {
-	return hCaptchaTask{
-		hCaptchaTaskProxyless: hCaptchaTaskProxyless{
+func NewHCaptchaTask(websiteURL, websiteKey, proxyType, proxyAddress string, proxyPort int) HCaptchaTask {
+	return HCaptchaTask{
+		HCaptchaTaskProxyless: HCaptchaTaskProxyless{
 			Type:       "HCaptchaTask",
 			WebsiteURL: websiteURL,
 			WebsiteKey: websiteKey,

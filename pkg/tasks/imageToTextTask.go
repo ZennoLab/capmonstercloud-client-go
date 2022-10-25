@@ -1,6 +1,6 @@
 package tasks
 
-type imageToTextTask struct {
+type ImageToTextTask struct {
 	Type                 string  `json:"type"`
 	Body                 string  `json:"body"`
 	CapMonsterModule     *string `json:"CapMonsterModule,omitempty"`
@@ -10,34 +10,34 @@ type imageToTextTask struct {
 	Math                 *bool   `json:"math,omitempty"`
 }
 
-func NewImageToTextTask(body string) imageToTextTask {
-	return imageToTextTask{
+func NewImageToTextTask(body string) ImageToTextTask {
+	return ImageToTextTask{
 		Type: "ImageToTextTask",
 		Body: body,
 	}
 }
 
-func (t imageToTextTask) WithCapMonsterModule(capMonsterModule string) imageToTextTask {
+func (t ImageToTextTask) WithCapMonsterModule(capMonsterModule string) ImageToTextTask {
 	t.CapMonsterModule = &capMonsterModule
 	return t
 }
 
-func (t imageToTextTask) WithRecognizingThreshold(recognizingThreshold int) imageToTextTask {
+func (t ImageToTextTask) WithRecognizingThreshold(recognizingThreshold int) ImageToTextTask {
 	t.RecognizingThreshold = &recognizingThreshold
 	return t
 }
 
-func (t imageToTextTask) WithCase(taskCase bool) imageToTextTask {
+func (t ImageToTextTask) WithCase(taskCase bool) ImageToTextTask {
 	t.Case = &taskCase
 	return t
 }
 
-func (t imageToTextTask) WithNumeric(numeric int) imageToTextTask {
+func (t ImageToTextTask) WithNumeric(numeric int) ImageToTextTask {
 	t.Numeric = &numeric
 	return t
 }
 
-func (t imageToTextTask) WithMath(math bool) imageToTextTask {
+func (t ImageToTextTask) WithMath(math bool) ImageToTextTask {
 	t.Math = &math
 	return t
 }

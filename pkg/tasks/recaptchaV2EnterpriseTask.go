@@ -1,6 +1,6 @@
 package tasks
 
-type recaptchaV2EnterpriseTaskProxyless struct {
+type RecaptchaV2EnterpriseTaskProxyless struct {
 	Type              string  `json:"type"`
 	WebsiteURL        string  `json:"websiteURL"`
 	WebsiteKey        string  `json:"websiteKey"`
@@ -8,33 +8,33 @@ type recaptchaV2EnterpriseTaskProxyless struct {
 	ApiDomain         *string `json:"apiDomain,omitempty"`
 }
 
-func NewRecaptchaV2EnterpriseTaskProxyless(websiteURL, websiteKey string) recaptchaV2EnterpriseTaskProxyless {
-	return recaptchaV2EnterpriseTaskProxyless{
+func NewRecaptchaV2EnterpriseTaskProxyless(websiteURL, websiteKey string) RecaptchaV2EnterpriseTaskProxyless {
+	return RecaptchaV2EnterpriseTaskProxyless{
 		Type:       "RecaptchaV2EnterpriseTaskProxyless",
 		WebsiteURL: websiteURL,
 		WebsiteKey: websiteKey,
 	}
 }
 
-func (t recaptchaV2EnterpriseTaskProxyless) WithEnterprisePayload(enterprisePayload string) recaptchaV2EnterpriseTaskProxyless {
+func (t RecaptchaV2EnterpriseTaskProxyless) WithEnterprisePayload(enterprisePayload string) RecaptchaV2EnterpriseTaskProxyless {
 	t.EnterprisePayload = &enterprisePayload
 	return t
 }
 
-func (t recaptchaV2EnterpriseTaskProxyless) WithApiDomain(apiDomain string) recaptchaV2EnterpriseTaskProxyless {
+func (t RecaptchaV2EnterpriseTaskProxyless) WithApiDomain(apiDomain string) RecaptchaV2EnterpriseTaskProxyless {
 	t.ApiDomain = &apiDomain
 	return t
 }
 
-type recaptchaV2EnterpriseTask struct {
-	recaptchaV2EnterpriseTaskProxyless
+type RecaptchaV2EnterpriseTask struct {
+	RecaptchaV2EnterpriseTaskProxyless
 	taskProxy
 	userAgentAndCookies
 }
 
-func NewRecaptchaV2EnterpriseTask(websiteURL, websiteKey, proxyType, proxyAddress string, proxyPort int) recaptchaV2EnterpriseTask {
-	return recaptchaV2EnterpriseTask{
-		recaptchaV2EnterpriseTaskProxyless: recaptchaV2EnterpriseTaskProxyless{
+func NewRecaptchaV2EnterpriseTask(websiteURL, websiteKey, proxyType, proxyAddress string, proxyPort int) RecaptchaV2EnterpriseTask {
+	return RecaptchaV2EnterpriseTask{
+		RecaptchaV2EnterpriseTaskProxyless: RecaptchaV2EnterpriseTaskProxyless{
 			Type:       "RecaptchaV2EnterpriseTask",
 			WebsiteURL: websiteURL,
 			WebsiteKey: websiteKey,

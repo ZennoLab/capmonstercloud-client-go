@@ -1,6 +1,6 @@
 package tasks
 
-type geeTestTaskProxyless struct {
+type GeeTestTaskProxyless struct {
 	Type                      string  `json:"type"`
 	WebsiteURL                string  `json:"websiteURL"`
 	Gt                        string  `json:"gt"`
@@ -10,32 +10,32 @@ type geeTestTaskProxyless struct {
 	userAgentAndCookies
 }
 
-func NewGeeTestTaskProxyless(websiteURL, gt, challenge string) geeTestTaskProxyless {
-	return geeTestTaskProxyless{
+func NewGeeTestTaskProxyless(websiteURL, gt, challenge string) GeeTestTaskProxyless {
+	return GeeTestTaskProxyless{
 		Type:      "GeeTestTaskProxyless",
 		Gt:        gt,
 		Challenge: challenge,
 	}
 }
 
-func (t geeTestTaskProxyless) WithGeetestApiServerSubdomain(geetestApiServerSubdomain string) geeTestTaskProxyless {
+func (t GeeTestTaskProxyless) WithGeetestApiServerSubdomain(geetestApiServerSubdomain string) GeeTestTaskProxyless {
 	t.GeetestApiServerSubdomain = &geetestApiServerSubdomain
 	return t
 }
 
-func (t geeTestTaskProxyless) WithGeetestGetLib(geetestGetLib string) geeTestTaskProxyless {
+func (t GeeTestTaskProxyless) WithGeetestGetLib(geetestGetLib string) GeeTestTaskProxyless {
 	t.GeetestGetLib = &geetestGetLib
 	return t
 }
 
-type geeTestTask struct {
-	geeTestTaskProxyless
+type GeeTestTask struct {
+	GeeTestTaskProxyless
 	taskProxy
 }
 
-func NewGeeTestTask(websiteURL, gt, challenge, proxyType, proxyAddress string, proxyPort int) geeTestTask {
-	return geeTestTask{
-		geeTestTaskProxyless: geeTestTaskProxyless{
+func NewGeeTestTask(websiteURL, gt, challenge, proxyType, proxyAddress string, proxyPort int) GeeTestTask {
+	return GeeTestTask{
+		GeeTestTaskProxyless: GeeTestTaskProxyless{
 			Type:      "GeeTestTask",
 			Gt:        gt,
 			Challenge: challenge,

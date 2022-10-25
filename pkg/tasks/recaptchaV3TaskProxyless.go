@@ -1,6 +1,6 @@
 package tasks
 
-type recaptchaV3TaskProxyless struct {
+type RecaptchaV3TaskProxyless struct {
 	Type       string   `json:"type"`
 	WebsiteURL string   `json:"websiteURL"`
 	WebsiteKey string   `json:"websiteKey"`
@@ -8,16 +8,16 @@ type recaptchaV3TaskProxyless struct {
 	PageAction *string  `json:"pageAction,omitempty"`
 }
 
-func NewRecaptchaV3TaskProxyless(websiteURL, websiteKey string) recaptchaV3TaskProxyless {
-	return recaptchaV3TaskProxyless{Type: "RecaptchaV3TaskProxyless", WebsiteURL: websiteURL, WebsiteKey: websiteKey}
+func NewRecaptchaV3TaskProxyless(websiteURL, websiteKey string) RecaptchaV3TaskProxyless {
+	return RecaptchaV3TaskProxyless{Type: "RecaptchaV3TaskProxyless", WebsiteURL: websiteURL, WebsiteKey: websiteKey}
 }
 
-func (t recaptchaV3TaskProxyless) WithMinScore(minScore float64) recaptchaV3TaskProxyless {
+func (t RecaptchaV3TaskProxyless) WithMinScore(minScore float64) RecaptchaV3TaskProxyless {
 	t.MinScore = &minScore
 	return t
 }
 
-func (t recaptchaV3TaskProxyless) WithPageAction(pageAction string) recaptchaV3TaskProxyless {
+func (t RecaptchaV3TaskProxyless) WithPageAction(pageAction string) RecaptchaV3TaskProxyless {
 	t.PageAction = &pageAction
 	return t
 }
