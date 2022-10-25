@@ -54,7 +54,3 @@ type GeeTestTaskSolution struct {
 	Seccode   string            `json:"seccode"`
 	Cookies   map[string]string `json:"cookies"`
 }
-type GeeTestTaskResult struct {
-	result
-	Solution GeeTestTaskSolution `json:"solution"`
-}

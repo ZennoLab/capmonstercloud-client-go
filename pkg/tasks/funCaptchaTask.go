@@ -54,8 +54,3 @@ type FunCaptchaTaskSolution struct {
 	Token   string            `json:"Token"`
 	Cookies map[string]string `json:"cookies"`
 }
-
-type FunCaptchaTaskResult struct {
-	result
-	Solution FunCaptchaTaskSolution `json:"solution"`
-}

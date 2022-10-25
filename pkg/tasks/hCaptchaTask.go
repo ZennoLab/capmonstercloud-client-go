@@ -54,7 +54,3 @@ type HCaptchaTaskSolution struct {
 	GRecaptchaResponse string            `json:"gRecaptchaResponse"`
 	Cookies            map[string]string `json:"cookies"`
 }
-type HCaptchaTaskResult struct {
-	result
-	Solution HCaptchaTaskSolution `json:"solution"`
-}

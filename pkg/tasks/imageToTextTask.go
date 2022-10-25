@@ -46,8 +46,3 @@ type ImageToTextTaskSolution struct {
 	Text    string            `json:"text"`
 	Cookies map[string]string `json:"cookies"`
 }
-
-type ImageToTextTaskResult struct {
-	result
-	Solution ImageToTextTaskSolution `json:"solution"`
-}

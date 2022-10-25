@@ -51,8 +51,3 @@ type RecaptchaV2EnterpriseTaskSolution struct {
 	GRecaptchaResponse string            `json:"gRecaptchaResponse"`
 	Cookies            map[string]string `json:"cookies"`
 }
-
-type RecaptchaV2EnterpriseTaskResult struct {
-	result
-	Solution RecaptchaV2EnterpriseTaskSolution `json:"solution"`
-}

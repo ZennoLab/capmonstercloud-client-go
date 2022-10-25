@@ -48,7 +48,3 @@ type NoCaptchaTaskSolution struct {
 	GRecaptchaResponse string            `json:"gRecaptchaResponse"`
 	Cookies            map[string]string `json:"cookies"`
 }
-type NoCaptchaTaskResult struct {
-	result
-	Solution NoCaptchaTaskSolution `json:"solution"`
-}
