@@ -1,4 +1,4 @@
-package client
+package tasks
 
 type imageToTextTask struct {
 	Type                 string  `json:"type"`
