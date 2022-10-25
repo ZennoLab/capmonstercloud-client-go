@@ -10,39 +10,39 @@ import (
 	"github.com/tandem97/capmonstercloud-client-go/pkg/tasks"
 )
 
-func (c *capmonsterClient) GetImageToTextTaskResult(taskId int) (tasks.ImageToTextTaskResult, error) {
+func (c *capmonsterClient) getImageToTextTaskResult(taskId int) (tasks.ImageToTextTaskResult, error) {
 	var result tasks.ImageToTextTaskResult
-	return result, c.GetTaskResult(taskId, &result)
+	return result, c.getTaskResult(taskId, &result)
 }
 
-func (c *capmonsterClient) GetNoCaptchaTaskResult(taskId int) (tasks.NoCaptchaTaskResult, error) {
+func (c *capmonsterClient) getNoCaptchaTaskResult(taskId int) (tasks.NoCaptchaTaskResult, error) {
 	var result tasks.NoCaptchaTaskResult
-	return result, c.GetTaskResult(taskId, &result)
+	return result, c.getTaskResult(taskId, &result)
 }
 
-func (c *capmonsterClient) GetRecaptchaV3TaskResult(taskId int) (tasks.RecaptchaV3TaskTaskResult, error) {
+func (c *capmonsterClient) getRecaptchaV3TaskResult(taskId int) (tasks.RecaptchaV3TaskTaskResult, error) {
 	var result tasks.RecaptchaV3TaskTaskResult
-	return result, c.GetTaskResult(taskId, &result)
+	return result, c.getTaskResult(taskId, &result)
 }
 
-func (c *capmonsterClient) GetRecaptchaV2EnterpriseTaskResult(taskId int) (tasks.RecaptchaV2EnterpriseTaskResult, error) {
+func (c *capmonsterClient) getRecaptchaV2EnterpriseTaskResult(taskId int) (tasks.RecaptchaV2EnterpriseTaskResult, error) {
 	var result tasks.RecaptchaV2EnterpriseTaskResult
-	return result, c.GetTaskResult(taskId, &result)
+	return result, c.getTaskResult(taskId, &result)
 }
 
-func (c *capmonsterClient) GetFunCaptchaTaskResult(taskId int) (tasks.FunCaptchaTaskResult, error) {
+func (c *capmonsterClient) getFunCaptchaTaskResult(taskId int) (tasks.FunCaptchaTaskResult, error) {
 	var result tasks.FunCaptchaTaskResult
-	return result, c.GetTaskResult(taskId, &result)
+	return result, c.getTaskResult(taskId, &result)
 }
 
-func (c *capmonsterClient) GetHCaptchaTaskResult(taskId int) (tasks.HCaptchaTaskResult, error) {
+func (c *capmonsterClient) getHCaptchaTaskResult(taskId int) (tasks.HCaptchaTaskResult, error) {
 	var result tasks.HCaptchaTaskResult
-	return result, c.GetTaskResult(taskId, &result)
+	return result, c.getTaskResult(taskId, &result)
 }
 
-func (c *capmonsterClient) GetGeeTestTaskResult(taskId int) (tasks.GeeTestTaskResult, error) {
+func (c *capmonsterClient) getGeeTestTaskResult(taskId int) (tasks.GeeTestTaskResult, error) {
 	var result tasks.GeeTestTaskResult
-	return result, c.GetTaskResult(taskId, &result)
+	return result, c.getTaskResult(taskId, &result)
 }
 
 type getTaskResultPayload struct {
@@ -50,7 +50,7 @@ type getTaskResultPayload struct {
 	TaskId    int    `json:"taskId"`
 }
 
-func (c *capmonsterClient) GetTaskResult(taskId int, result interface{}) error {
+func (c *capmonsterClient) getTaskResult(taskId int, result interface{}) error {
 	body, err := json.Marshal(getTaskResultPayload{
 		ClientKey: c.clientKey,
 		TaskId:    taskId,
