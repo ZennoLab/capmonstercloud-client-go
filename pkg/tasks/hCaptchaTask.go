@@ -33,7 +33,6 @@ func (t hCaptchaTaskProxyless) WithData(data string) hCaptchaTaskProxyless {
 type hCaptchaTask struct {
 	hCaptchaTaskProxyless
 	taskProxy
-	userAgentAndCookies
 }
 
 func NewHCaptchaTask(websiteURL, websiteKey, proxyType, proxyAddress string, proxyPort int) hCaptchaTask {

@@ -24,11 +24,6 @@ func (t noCaptchaTaskProxyless) WithRecaptchaDataSValue(recaptchaDataSValue stri
 	return t
 }
 
-func (t noCaptchaTaskProxyless) WithCookies(cookies string) noCaptchaTaskProxyless {
-	t.Cookies = &cookies
-	return t
-}
-
 type noCaptchaTask struct {
 	noCaptchaTaskProxyless
 	taskProxy
