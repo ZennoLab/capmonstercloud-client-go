@@ -43,5 +43,6 @@ func (t ImageToTextTask) WithMath(math bool) ImageToTextTask {
 }
 
 type ImageToTextTaskResult struct {
-	Text string `json:"text"`
+	Text    string            `json:"text"`
+	Cookies map[string]string `json:"cookies"`
 }

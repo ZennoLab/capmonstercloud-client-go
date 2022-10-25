@@ -51,5 +51,6 @@ func NewFunCaptchaTask(websiteURL, websitePublicKey, proxyType, proxyAddress, us
 }
 
 type FunCaptchaTaskResult struct {
-	Token string `json:"Token"`
+	Token   string            `json:"Token"`
+	Cookies map[string]string `json:"cookies"`
 }
