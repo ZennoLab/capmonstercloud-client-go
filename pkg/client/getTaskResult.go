@@ -105,6 +105,7 @@ func (c *capmonsterClient) getTaskResult(taskId int, result interface{}) error {
 	if err != nil {
 		return fmt.Errorf("create http request: %w", err)
 	}
+	req.Header.Add("UserAgent", "Zennolab.CapMonsterCloud.Client/0.0.1")
 
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
