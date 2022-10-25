@@ -29,4 +29,5 @@ var (
 	}
 
 	errUnknown = errors.New("unknown error")
+	errTimeout = errors.New("waiting timeout exceeded")
 )
