@@ -22,10 +22,12 @@ func (t RecaptchaV3TaskProxyless) WithPageAction(pageAction string) RecaptchaV3T
 	return t
 }
 
+type RecaptchaV3TaskTaskSolution struct {
+	GRecaptchaResponse string            `json:"gRecaptchaResponse"`
+	Cookies            map[string]string `json:"cookies"`
+}
+
 type RecaptchaV3TaskTaskResult struct {
 	result
-	Solution struct {
-		GRecaptchaResponse string            `json:"gRecaptchaResponse"`
-		Cookies            map[string]string `json:"cookies"`
-	} `json:"solution"`
+	Solution RecaptchaV3TaskTaskSolution `json:"solution"`
 }

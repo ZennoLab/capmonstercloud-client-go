@@ -50,10 +50,11 @@ func NewHCaptchaTask(websiteURL, websiteKey, proxyType, proxyAddress string, pro
 	}
 }
 
+type HCaptchaTaskSolution struct {
+	GRecaptchaResponse string            `json:"gRecaptchaResponse"`
+	Cookies            map[string]string `json:"cookies"`
+}
 type HCaptchaTaskResult struct {
 	result
-	Solution struct {
-		GRecaptchaResponse string            `json:"gRecaptchaResponse"`
-		Cookies            map[string]string `json:"cookies"`
-	} `json:"solution"`
+	Solution HCaptchaTaskSolution `json:"solution"`
 }

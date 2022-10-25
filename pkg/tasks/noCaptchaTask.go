@@ -44,10 +44,11 @@ func NewNoCaptchaTask(websiteURL, websiteKey, proxyType, proxyAddress string, pr
 	}
 }
 
+type NoCaptchaTaskSolution struct {
+	GRecaptchaResponse string            `json:"gRecaptchaResponse"`
+	Cookies            map[string]string `json:"cookies"`
+}
 type NoCaptchaTaskResult struct {
 	result
-	Solution struct {
-		GRecaptchaResponse string            `json:"gRecaptchaResponse"`
-		Cookies            map[string]string `json:"cookies"`
-	} `json:"solution"`
+	Solution NoCaptchaTaskSolution `json:"solution"`
 }

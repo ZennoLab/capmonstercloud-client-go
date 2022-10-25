@@ -47,10 +47,12 @@ func NewRecaptchaV2EnterpriseTask(websiteURL, websiteKey, proxyType, proxyAddres
 	}
 }
 
+type RecaptchaV2EnterpriseTaskSolution struct {
+	GRecaptchaResponse string            `json:"gRecaptchaResponse"`
+	Cookies            map[string]string `json:"cookies"`
+}
+
 type RecaptchaV2EnterpriseTaskResult struct {
 	result
-	Solution struct {
-		GRecaptchaResponse string            `json:"gRecaptchaResponse"`
-		Cookies            map[string]string `json:"cookies"`
-	} `json:"solution"`
+	Solution RecaptchaV2EnterpriseTaskSolution `json:"solution"`
 }
