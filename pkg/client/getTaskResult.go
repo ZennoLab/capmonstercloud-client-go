@@ -15,17 +15,12 @@ func (c *capmonsterClient) GetImageToTextTaskResult(taskId int) (tasks.ImageToTe
 	return result, c.GetTaskResult(taskId, &result)
 }
 
-func (c *capmonsterClient) GetNoCaptchaTaskProxylessResult(taskId int) (tasks.NoCaptchaTaskResult, error) {
-	var result tasks.NoCaptchaTaskResult
-	return result, c.GetTaskResult(taskId, &result)
-}
-
 func (c *capmonsterClient) GetNoCaptchaTaskResult(taskId int) (tasks.NoCaptchaTaskResult, error) {
 	var result tasks.NoCaptchaTaskResult
 	return result, c.GetTaskResult(taskId, &result)
 }
 
-func (c *capmonsterClient) GetRecaptchaV3TaskProxylessResult(taskId int) (tasks.RecaptchaV3TaskTaskResult, error) {
+func (c *capmonsterClient) GetRecaptchaV3TaskResult(taskId int) (tasks.RecaptchaV3TaskTaskResult, error) {
 	var result tasks.RecaptchaV3TaskTaskResult
 	return result, c.GetTaskResult(taskId, &result)
 }
@@ -35,17 +30,7 @@ func (c *capmonsterClient) GetRecaptchaV2EnterpriseTaskResult(taskId int) (tasks
 	return result, c.GetTaskResult(taskId, &result)
 }
 
-func (c *capmonsterClient) GetRecaptchaV2EnterpriseTaskProxylessResult(taskId int) (tasks.RecaptchaV2EnterpriseTaskResult, error) {
-	var result tasks.RecaptchaV2EnterpriseTaskResult
-	return result, c.GetTaskResult(taskId, &result)
-}
-
 func (c *capmonsterClient) GetFunCaptchaTaskResult(taskId int) (tasks.FunCaptchaTaskResult, error) {
-	var result tasks.FunCaptchaTaskResult
-	return result, c.GetTaskResult(taskId, &result)
-}
-
-func (c *capmonsterClient) GetFunCaptchaTaskProxylessResult(taskId int) (tasks.FunCaptchaTaskResult, error) {
 	var result tasks.FunCaptchaTaskResult
 	return result, c.GetTaskResult(taskId, &result)
 }
@@ -55,17 +40,7 @@ func (c *capmonsterClient) GetHCaptchaTaskResult(taskId int) (tasks.HCaptchaTask
 	return result, c.GetTaskResult(taskId, &result)
 }
 
-func (c *capmonsterClient) GetHCaptchaTaskProxylessResult(taskId int) (tasks.HCaptchaTaskResult, error) {
-	var result tasks.HCaptchaTaskResult
-	return result, c.GetTaskResult(taskId, &result)
-}
-
 func (c *capmonsterClient) GetGeeTestTaskResult(taskId int) (tasks.GeeTestTaskResult, error) {
-	var result tasks.GeeTestTaskResult
-	return result, c.GetTaskResult(taskId, &result)
-}
-
-func (c *capmonsterClient) GetGeeTestTaskProxylessResult(taskId int) (tasks.GeeTestTaskResult, error) {
 	var result tasks.GeeTestTaskResult
 	return result, c.GetTaskResult(taskId, &result)
 }
