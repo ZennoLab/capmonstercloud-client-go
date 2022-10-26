@@ -45,7 +45,7 @@ var (
 		timeout:           180 * time.Second,
 	}
 
-	GeeTestTimings = resolveCapTimings{
+	geeTestTimings = resolveCapTimings{
 		firstRequestDelay: 1 * time.Second,
 		requestsInterval:  1 * time.Second,
 		timeout:           80 * time.Second,

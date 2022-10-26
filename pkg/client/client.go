@@ -280,9 +280,9 @@ func (c *capmonsterClient) resolveGeeTest(task interface{}, callbackUrl *string)
 		return nil, fmt.Errorf("create task: %w", err)
 	}
 
-	time.Sleep(GeeTestTimings.firstRequestDelay)
-	retryTicker := time.NewTicker(GeeTestTimings.requestsInterval)
-	timeoutTicker := time.NewTicker(GeeTestTimings.timeout)
+	time.Sleep(geeTestTimings.firstRequestDelay)
+	retryTicker := time.NewTicker(geeTestTimings.requestsInterval)
+	timeoutTicker := time.NewTicker(geeTestTimings.timeout)
 
 loop:
 	for {
