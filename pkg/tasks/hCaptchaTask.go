@@ -41,6 +41,10 @@ func (t HCaptchaTaskProxyless) Validate() error {
 	if len(t.WebsiteKey) < 1 || len(t.WebsiteKey) > math.MaxInt {
 		return fmt.Errorf("WebsiteKey len error")
 	}
+
+	if t.Data != nil && t.UserAgent == nil {
+		return fmt.Errorf("UserAgent required")
+	}
 	return nil
 }
 
