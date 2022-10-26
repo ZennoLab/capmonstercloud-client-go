@@ -229,11 +229,11 @@ func (c *capmonsterClient) resolveFunCaptcha(task interface{}, callbackUrl *stri
 	}
 }
 
-func (c *capmonsterClient) ResolveFunCaptcha(task tasks.RecaptchaV2EnterpriseTask, callbackUrl *string) (*tasks.FunCaptchaTaskSolution, error) {
+func (c *capmonsterClient) ResolveFunCaptcha(task tasks.FunCaptchaTask, callbackUrl *string) (*tasks.FunCaptchaTaskSolution, error) {
 	return c.resolveFunCaptcha(task, callbackUrl)
 }
 
-func (c *capmonsterClient) ResolveFunCaptchaProxyless(task tasks.RecaptchaV2EnterpriseTaskProxyless, callbackUrl *string) (*tasks.FunCaptchaTaskSolution, error) {
+func (c *capmonsterClient) ResolveFunCaptchaProxyless(task tasks.FunCaptchaTaskProxyless, callbackUrl *string) (*tasks.FunCaptchaTaskSolution, error) {
 	return c.resolveFunCaptcha(task, callbackUrl)
 }
 
@@ -273,11 +273,11 @@ func (c *capmonsterClient) resolveHCaptcha(task interface{}, callbackUrl *string
 	}
 }
 
-func (c *capmonsterClient) ResolveHCaptcha(task tasks.RecaptchaV2EnterpriseTask, callbackUrl *string) (*tasks.HCaptchaTaskSolution, error) {
+func (c *capmonsterClient) ResolveHCaptcha(task tasks.HCaptchaTask, callbackUrl *string) (*tasks.HCaptchaTaskSolution, error) {
 	return c.resolveHCaptcha(task, callbackUrl)
 }
 
-func (c *capmonsterClient) ResolveHCaptchaProxyless(task tasks.RecaptchaV2EnterpriseTaskProxyless, callbackUrl *string) (*tasks.HCaptchaTaskSolution, error) {
+func (c *capmonsterClient) ResolveHCaptchaProxyless(task tasks.HCaptchaTaskProxyless, callbackUrl *string) (*tasks.HCaptchaTaskSolution, error) {
 	return c.resolveHCaptcha(task, callbackUrl)
 }
 
@@ -317,10 +317,10 @@ func (c *capmonsterClient) resolveGeeTest(task interface{}, callbackUrl *string)
 	}
 }
 
-func (c *capmonsterClient) ResolveGeeTest(task tasks.RecaptchaV2EnterpriseTask, callbackUrl *string) (*tasks.GeeTestTaskSolution, error) {
+func (c *capmonsterClient) ResolveGeeTest(task tasks.GeeTestTask, callbackUrl *string) (*tasks.GeeTestTaskSolution, error) {
 	return c.resolveGeeTest(task, callbackUrl)
 }
 
-func (c *capmonsterClient) ResolveGeeTestProxyless(task tasks.RecaptchaV2EnterpriseTaskProxyless, callbackUrl *string) (*tasks.GeeTestTaskSolution, error) {
+func (c *capmonsterClient) ResolveGeeTestProxyless(task tasks.GeeTestTaskProxyless, callbackUrl *string) (*tasks.GeeTestTaskSolution, error) {
 	return c.resolveGeeTest(task, callbackUrl)
 }
