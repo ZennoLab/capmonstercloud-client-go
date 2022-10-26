@@ -1,5 +1,11 @@
 package tasks
 
+import (
+	"fmt"
+	"math"
+	"net/url"
+)
+
 type RecaptchaV2EnterpriseTaskProxyless struct {
 	Type              string  `json:"type"`
 	WebsiteURL        string  `json:"websiteURL"`
@@ -26,6 +32,19 @@ func (t RecaptchaV2EnterpriseTaskProxyless) WithApiDomain(apiDomain string) Reca
 	return t
 }
 
+func (t RecaptchaV2EnterpriseTaskProxyless) Validate() error {
+	if _, err := url.ParseRequestURI(t.WebsiteURL); err != nil {
+		return fmt.Errorf("parse WebsiteURL: %w", err)
+	}
+	if len(t.WebsiteKey) < 1 || len(t.WebsiteKey) > math.MaxInt {
+		return fmt.Errorf("WebsiteKey len error")
+	}
+	if t.EnterprisePayload != nil && (len(*t.EnterprisePayload) < 1 || len(*t.EnterprisePayload) > math.MaxInt) {
+		return fmt.Errorf("EnterprisePayload len error")
+	}
+	return nil
+}
+
 type RecaptchaV2EnterpriseTask struct {
 	RecaptchaV2EnterpriseTaskProxyless
 	taskProxy
@@ -45,6 +64,16 @@ func NewRecaptchaV2EnterpriseTask(websiteURL, websiteKey, proxyType, proxyAddres
 			ProxyPort:    proxyPort,
 		},
 	}
+}
+
+func (t RecaptchaV2EnterpriseTask) Validate() error {
+	if err := t.RecaptchaV2EnterpriseTaskProxyless.Validate(); err != nil {
+		return err
+	}
+	if err := t.taskProxy.validate(); err != nil {
+		return err
+	}
+	return nil
 }
 
 type RecaptchaV2EnterpriseTaskSolution struct {

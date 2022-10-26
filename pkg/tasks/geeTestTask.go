@@ -1,5 +1,11 @@
 package tasks
 
+import (
+	"fmt"
+	"math"
+	"net/url"
+)
+
 type GeeTestTaskProxyless struct {
 	Type                      string  `json:"type"`
 	WebsiteURL                string  `json:"websiteURL"`
@@ -12,9 +18,10 @@ type GeeTestTaskProxyless struct {
 
 func NewGeeTestTaskProxyless(websiteURL, gt, challenge string) GeeTestTaskProxyless {
 	return GeeTestTaskProxyless{
-		Type:      "GeeTestTaskProxyless",
-		Gt:        gt,
-		Challenge: challenge,
+		Type:       "GeeTestTaskProxyless",
+		WebsiteURL: websiteURL,
+		Gt:         gt,
+		Challenge:  challenge,
 	}
 }
 
@@ -26,6 +33,16 @@ func (t GeeTestTaskProxyless) WithGeetestApiServerSubdomain(geetestApiServerSubd
 func (t GeeTestTaskProxyless) WithGeetestGetLib(geetestGetLib string) GeeTestTaskProxyless {
 	t.GeetestGetLib = &geetestGetLib
 	return t
+}
+
+func (t GeeTestTaskProxyless) Validate() error {
+	if _, err := url.ParseRequestURI(t.WebsiteURL); err != nil {
+		return fmt.Errorf("parse WebsiteURL: %w", err)
+	}
+	if len(t.Gt) < 1 || len(t.Gt) > math.MaxInt {
+		return fmt.Errorf("gt len error")
+	}
+	return nil
 }
 
 type GeeTestTask struct {
@@ -46,6 +63,16 @@ func NewGeeTestTask(websiteURL, gt, challenge, proxyType, proxyAddress string, p
 			ProxyPort:    proxyPort,
 		},
 	}
+}
+
+func (t GeeTestTask) Validate() error {
+	if err := t.GeeTestTaskProxyless.Validate(); err != nil {
+		return err
+	}
+	if err := t.taskProxy.validate(); err != nil {
+		return err
+	}
+	return nil
 }
 
 type GeeTestTaskSolution struct {

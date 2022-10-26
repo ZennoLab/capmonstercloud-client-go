@@ -1,5 +1,7 @@
 package tasks
 
+import "fmt"
+
 type ImageToTextTask struct {
 	Type                 string  `json:"type"`
 	Body                 string  `json:"body"`
@@ -40,6 +42,13 @@ func (t ImageToTextTask) WithNumeric(numeric int) ImageToTextTask {
 func (t ImageToTextTask) WithMath(math bool) ImageToTextTask {
 	t.Math = &math
 	return t
+}
+
+func (t ImageToTextTask) Validate() error {
+	if t.RecognizingThreshold != nil && (*t.RecognizingThreshold < 0 || *t.RecognizingThreshold > 100) {
+		return fmt.Errorf("RecognizingThreshold is not in [0,100] range")
+	}
+	return nil
 }
 
 type ImageToTextTaskSolution struct {

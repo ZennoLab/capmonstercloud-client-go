@@ -1,5 +1,10 @@
 package tasks
 
+import (
+	"fmt"
+	"net/url"
+)
+
 type FunCaptchaTaskProxyless struct {
 	Type                     string  `json:"type"`
 	WebsiteURL               string  `json:"websiteURL"`
@@ -26,6 +31,13 @@ func (t FunCaptchaTaskProxyless) WithData(data string) FunCaptchaTaskProxyless {
 	return t
 }
 
+func (t FunCaptchaTaskProxyless) Validate() error {
+	if _, err := url.ParseRequestURI(t.WebsiteURL); err != nil {
+		return fmt.Errorf("parse WebsiteURL: %w", err)
+	}
+	return nil
+}
+
 type FunCaptchaTask struct {
 	FunCaptchaTaskProxyless
 	taskProxy
@@ -48,6 +60,16 @@ func NewFunCaptchaTask(websiteURL, websitePublicKey, proxyType, proxyAddress, us
 			UserAgent: &userAgent,
 		},
 	}
+}
+
+func (t FunCaptchaTask) Validate() error {
+	if err := t.FunCaptchaTaskProxyless.Validate(); err != nil {
+		return err
+	}
+	if err := t.taskProxy.validate(); err != nil {
+		return err
+	}
+	return nil
 }
 
 type FunCaptchaTaskSolution struct {

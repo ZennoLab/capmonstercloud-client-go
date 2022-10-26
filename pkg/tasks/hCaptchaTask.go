@@ -1,5 +1,11 @@
 package tasks
 
+import (
+	"fmt"
+	"math"
+	"net/url"
+)
+
 type HCaptchaTaskProxyless struct {
 	Type        string  `json:"type"`
 	WebsiteURL  string  `json:"websiteURL"`
@@ -30,6 +36,17 @@ func (t HCaptchaTaskProxyless) WithData(data string) HCaptchaTaskProxyless {
 	return t
 }
 
+func (t HCaptchaTaskProxyless) Validate() error {
+	if _, err := url.ParseRequestURI(t.WebsiteURL); err != nil {
+		return fmt.Errorf("parse WebsiteURL: %w", err)
+	}
+
+	if len(t.WebsiteKey) < 1 || len(t.WebsiteKey) > math.MaxInt {
+		return fmt.Errorf("WebsiteKey len error")
+	}
+	return nil
+}
+
 type HCaptchaTask struct {
 	HCaptchaTaskProxyless
 	taskProxy
@@ -48,6 +65,16 @@ func NewHCaptchaTask(websiteURL, websiteKey, proxyType, proxyAddress string, pro
 			ProxyPort:    proxyPort,
 		},
 	}
+}
+
+func (t HCaptchaTask) Validate() error {
+	if err := t.HCaptchaTaskProxyless.Validate(); err != nil {
+		return err
+	}
+	if err := t.taskProxy.validate(); err != nil {
+		return err
+	}
+	return nil
 }
 
 type HCaptchaTaskSolution struct {

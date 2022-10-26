@@ -1,5 +1,11 @@
 package tasks
 
+import (
+	"fmt"
+	"math"
+	"net/url"
+)
+
 type NoCaptchaTaskProxyless struct {
 	Type                string  `json:"type"`
 	WebsiteURL          string  `json:"websiteURL"`
@@ -24,6 +30,17 @@ func (t NoCaptchaTaskProxyless) WithRecaptchaDataSValue(recaptchaDataSValue stri
 	return t
 }
 
+func (t NoCaptchaTaskProxyless) Validate() error {
+	if _, err := url.ParseRequestURI(t.WebsiteURL); err != nil {
+		return fmt.Errorf("parse WebsiteURL: %w", err)
+	}
+
+	if len(t.WebsiteKey) < 1 || len(t.WebsiteKey) > math.MaxInt {
+		return fmt.Errorf("WebsiteKey len error")
+	}
+	return nil
+}
+
 type NoCaptchaTask struct {
 	NoCaptchaTaskProxyless
 	taskProxy
@@ -42,6 +59,16 @@ func NewNoCaptchaTask(websiteURL, websiteKey, proxyType, proxyAddress string, pr
 			ProxyPort:    proxyPort,
 		},
 	}
+}
+
+func (t NoCaptchaTask) Validate() error {
+	if err := t.NoCaptchaTaskProxyless.Validate(); err != nil {
+		return err
+	}
+	if err := t.taskProxy.validate(); err != nil {
+		return err
+	}
+	return nil
 }
 
 type NoCaptchaTaskSolution struct {

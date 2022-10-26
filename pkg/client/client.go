@@ -34,6 +34,10 @@ func New(clientKey string) *capmonsterClient {
 }
 
 func (c *capmonsterClient) ResolveImageToText(task tasks.ImageToTextTask, callbackUrl *string) (*tasks.ImageToTextTaskSolution, error) {
+	if err := task.Validate(); err != nil {
+		return nil, fmt.Errorf("validate: %w", err)
+	}
+
 	taskId, err := c.createTask(task, callbackUrl)
 	if err != nil {
 		return nil, fmt.Errorf("create task: %w", err)
@@ -106,14 +110,26 @@ func (c *capmonsterClient) resolveNoCaptcha(task interface{}, callbackUrl *strin
 }
 
 func (c *capmonsterClient) ResolveNoCaptcha(task tasks.NoCaptchaTask, callbackUrl *string) (*tasks.NoCaptchaTaskSolution, error) {
+	if err := task.Validate(); err != nil {
+		return nil, fmt.Errorf("validate: %w", err)
+	}
+
 	return c.resolveNoCaptcha(task, callbackUrl)
 }
 
 func (c *capmonsterClient) ResolveNoCaptchaProxyless(task tasks.NoCaptchaTaskProxyless, callbackUrl *string) (*tasks.NoCaptchaTaskSolution, error) {
+	if err := task.Validate(); err != nil {
+		return nil, fmt.Errorf("validate: %w", err)
+	}
+
 	return c.resolveNoCaptcha(task, callbackUrl)
 }
 
 func (c *capmonsterClient) ResolveRecaptchaV3Proxyless(task tasks.RecaptchaV3TaskProxyless, callbackUrl *string) (*tasks.RecaptchaV3TaskTaskSolution, error) {
+	if err := task.Validate(); err != nil {
+		return nil, fmt.Errorf("validate: %w", err)
+	}
+
 	taskId, err := c.createTask(task, callbackUrl)
 	if err != nil {
 		return nil, fmt.Errorf("create task: %w", err)
@@ -186,10 +202,18 @@ func (c *capmonsterClient) resolveRecaptchaV2Enterprise(task interface{}, callba
 }
 
 func (c *capmonsterClient) ResolveRecaptchaV2Enterprise(task tasks.RecaptchaV2EnterpriseTask, callbackUrl *string) (*tasks.RecaptchaV2EnterpriseTaskSolution, error) {
+	if err := task.Validate(); err != nil {
+		return nil, fmt.Errorf("validate: %w", err)
+	}
+
 	return c.resolveRecaptchaV2Enterprise(task, callbackUrl)
 }
 
 func (c *capmonsterClient) ResolveRecaptchaV2EnterpriseProxyless(task tasks.RecaptchaV2EnterpriseTaskProxyless, callbackUrl *string) (*tasks.RecaptchaV2EnterpriseTaskSolution, error) {
+	if err := task.Validate(); err != nil {
+		return nil, fmt.Errorf("validate: %w", err)
+	}
+
 	return c.resolveRecaptchaV2Enterprise(task, callbackUrl)
 }
 
@@ -230,10 +254,16 @@ func (c *capmonsterClient) resolveFunCaptcha(task interface{}, callbackUrl *stri
 }
 
 func (c *capmonsterClient) ResolveFunCaptcha(task tasks.FunCaptchaTask, callbackUrl *string) (*tasks.FunCaptchaTaskSolution, error) {
+	if err := task.Validate(); err != nil {
+		return nil, fmt.Errorf("validate: %w", err)
+	}
 	return c.resolveFunCaptcha(task, callbackUrl)
 }
 
 func (c *capmonsterClient) ResolveFunCaptchaProxyless(task tasks.FunCaptchaTaskProxyless, callbackUrl *string) (*tasks.FunCaptchaTaskSolution, error) {
+	if err := task.Validate(); err != nil {
+		return nil, fmt.Errorf("validate: %w", err)
+	}
 	return c.resolveFunCaptcha(task, callbackUrl)
 }
 
@@ -274,10 +304,16 @@ func (c *capmonsterClient) resolveHCaptcha(task interface{}, callbackUrl *string
 }
 
 func (c *capmonsterClient) ResolveHCaptcha(task tasks.HCaptchaTask, callbackUrl *string) (*tasks.HCaptchaTaskSolution, error) {
+	if err := task.Validate(); err != nil {
+		return nil, fmt.Errorf("validate: %w", err)
+	}
 	return c.resolveHCaptcha(task, callbackUrl)
 }
 
 func (c *capmonsterClient) ResolveHCaptchaProxyless(task tasks.HCaptchaTaskProxyless, callbackUrl *string) (*tasks.HCaptchaTaskSolution, error) {
+	if err := task.Validate(); err != nil {
+		return nil, fmt.Errorf("validate: %w", err)
+	}
 	return c.resolveHCaptcha(task, callbackUrl)
 }
 
@@ -318,9 +354,15 @@ func (c *capmonsterClient) resolveGeeTest(task interface{}, callbackUrl *string)
 }
 
 func (c *capmonsterClient) ResolveGeeTest(task tasks.GeeTestTask, callbackUrl *string) (*tasks.GeeTestTaskSolution, error) {
+	if err := task.Validate(); err != nil {
+		return nil, fmt.Errorf("validate: %w", err)
+	}
 	return c.resolveGeeTest(task, callbackUrl)
 }
 
 func (c *capmonsterClient) ResolveGeeTestProxyless(task tasks.GeeTestTaskProxyless, callbackUrl *string) (*tasks.GeeTestTaskSolution, error) {
+	if err := task.Validate(); err != nil {
+		return nil, fmt.Errorf("validate: %w", err)
+	}
 	return c.resolveGeeTest(task, callbackUrl)
 }
