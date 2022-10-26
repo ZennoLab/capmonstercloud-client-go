@@ -91,7 +91,7 @@ func (c *capmonsterClient) getTaskResult(taskId int, result interface{}) error {
 	}
 
 	if err := json.Unmarshal(respBody, &result); err != nil {
-		return fmt.Errorf("unmarshal responce payload: %w", err)
+		return fmt.Errorf("unmarshal response payload: %w", err)
 	}
 
 	return nil
