@@ -200,6 +200,9 @@ func (c *capmonsterClient) resolve(retryTickerCh <-chan time.Time, timeoutTicker
 			err := c.getTaskResult(taskId, result)
 			switch {
 			case err != nil:
+				if err == errServiceServiceUnavailable {
+					continue
+				}
 				return fmt.Errorf("get task result: %w", err)
 			case result.ErrorId != 0 && result.ErrorCode != "CAPTCHA_NOT_READY":
 				if err, ok := errMap[result.ErrorCode]; ok {

@@ -28,6 +28,7 @@ var (
 		"ERROR_TASK_NOT_SUPPORTED":        errors.New("INCORRECT TASK TYPE"),
 	}
 
-	errUnknown = errors.New("unknown error")
-	errTimeout = errors.New("waiting timeout exceeded")
+	errUnknown                   = errors.New("unknown error")
+	errTimeout                   = errors.New("waiting timeout exceeded")
+	errServiceServiceUnavailable = errors.New("service unavailable")
 )
