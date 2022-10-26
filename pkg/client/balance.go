@@ -37,6 +37,10 @@ func (c *capmonsterClient) GetBalance() (float64, error) {
 	}
 	defer resp.Body.Close()
 
+	if resp.StatusCode < 200 || resp.StatusCode > 299 {
+		return 0, fmt.Errorf("responce status code: %v", resp.StatusCode)
+	}
+
 	respBody, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return 0, fmt.Errorf("read response body: %w", err)
