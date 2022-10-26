@@ -56,7 +56,7 @@ func (c *capmonsterClient) createTask(task interface{}, callbackUrl *string) (in
 
 	var respPayload createTaskRequestResponsePayload
 	if err := json.Unmarshal(respBody, &respPayload); err != nil {
-		return 0, fmt.Errorf("unmarshal responce payload: %w", err)
+		return 0, fmt.Errorf("unmarshal response payload: %w", err)
 	}
 
 	if respPayload.ErrorId != 0 {
