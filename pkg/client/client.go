@@ -46,7 +46,8 @@ loop:
 	for {
 		select {
 		case <-retryTicker.C:
-			result, err := c.getImageToTextTaskResult(taskId)
+			var result imageToTextTaskResult
+			err := c.getTaskResult(taskId, &result)
 			switch {
 			case err != nil:
 				return nil, err
@@ -80,7 +81,8 @@ loop:
 	for {
 		select {
 		case <-retryTicker.C:
-			result, err := c.getNoCaptchaTaskResult(taskId)
+			var result noCaptchaTaskResult
+			err := c.getTaskResult(taskId, &result)
 			switch {
 			case err != nil:
 				return nil, err
@@ -122,7 +124,8 @@ loop:
 	for {
 		select {
 		case <-retryTicker.C:
-			result, err := c.getRecaptchaV3TaskResult(taskId)
+			var result recaptchaV3TaskTaskResult
+			err := c.getTaskResult(taskId, &result)
 			switch {
 			case err != nil:
 				return nil, err
@@ -156,7 +159,8 @@ loop:
 	for {
 		select {
 		case <-retryTicker.C:
-			result, err := c.getRecaptchaV2EnterpriseTaskResult(taskId)
+			var result recaptchaV2EnterpriseTaskResult
+			err := c.getTaskResult(taskId, &result)
 			switch {
 			case err != nil:
 				return nil, err
@@ -198,7 +202,8 @@ loop:
 	for {
 		select {
 		case <-retryTicker.C:
-			result, err := c.getFunCaptchaTaskResult(taskId)
+			var result funCaptchaTaskResult
+			err := c.getTaskResult(taskId, &result)
 			switch {
 			case err != nil:
 				return nil, err
@@ -240,7 +245,8 @@ loop:
 	for {
 		select {
 		case <-retryTicker.C:
-			result, err := c.getHCaptchaTaskResult(taskId)
+			var result hCaptchaTaskResult
+			err := c.getTaskResult(taskId, &result)
 			switch {
 			case err != nil:
 				return nil, err
@@ -282,7 +288,8 @@ loop:
 	for {
 		select {
 		case <-retryTicker.C:
-			result, err := c.getGeeTestTaskResult(taskId)
+			var result geeTestTaskResult
+			err := c.getTaskResult(taskId, &result)
 			switch {
 			case err != nil:
 				return nil, err

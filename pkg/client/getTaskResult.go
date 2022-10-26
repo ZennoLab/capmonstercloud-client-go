@@ -51,41 +51,6 @@ type recaptchaV2EnterpriseTaskResult struct {
 	Solution tasks.RecaptchaV2EnterpriseTaskSolution `json:"solution"`
 }
 
-func (c *capmonsterClient) getImageToTextTaskResult(taskId int) (imageToTextTaskResult, error) {
-	var result imageToTextTaskResult
-	return result, c.getTaskResult(taskId, &result)
-}
-
-func (c *capmonsterClient) getNoCaptchaTaskResult(taskId int) (noCaptchaTaskResult, error) {
-	var result noCaptchaTaskResult
-	return result, c.getTaskResult(taskId, &result)
-}
-
-func (c *capmonsterClient) getRecaptchaV3TaskResult(taskId int) (recaptchaV3TaskTaskResult, error) {
-	var result recaptchaV3TaskTaskResult
-	return result, c.getTaskResult(taskId, &result)
-}
-
-func (c *capmonsterClient) getRecaptchaV2EnterpriseTaskResult(taskId int) (recaptchaV2EnterpriseTaskResult, error) {
-	var result recaptchaV2EnterpriseTaskResult
-	return result, c.getTaskResult(taskId, &result)
-}
-
-func (c *capmonsterClient) getFunCaptchaTaskResult(taskId int) (funCaptchaTaskResult, error) {
-	var result funCaptchaTaskResult
-	return result, c.getTaskResult(taskId, &result)
-}
-
-func (c *capmonsterClient) getHCaptchaTaskResult(taskId int) (hCaptchaTaskResult, error) {
-	var result hCaptchaTaskResult
-	return result, c.getTaskResult(taskId, &result)
-}
-
-func (c *capmonsterClient) getGeeTestTaskResult(taskId int) (geeTestTaskResult, error) {
-	var result geeTestTaskResult
-	return result, c.getTaskResult(taskId, &result)
-}
-
 type getTaskResultPayload struct {
 	ClientKey string `json:"clientKey"`
 	TaskId    int    `json:"taskId"`
