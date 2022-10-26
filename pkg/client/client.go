@@ -44,7 +44,7 @@ func (c *capmonsterClient) ResolveImageToText(task tasks.ImageToTextTask, callba
 
 	var result imageToTextTaskResult
 	if err := c.resolve(retryTicker.C, timeoutTicker.C, taskId, &result); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
 }
@@ -61,7 +61,7 @@ func (c *capmonsterClient) resolveNoCaptcha(task interface{}, callbackUrl *strin
 
 	var result noCaptchaTaskResult
 	if err := c.resolve(retryTicker.C, timeoutTicker.C, taskId, &result); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
 }
@@ -86,7 +86,7 @@ func (c *capmonsterClient) ResolveRecaptchaV3Proxyless(task tasks.RecaptchaV3Tas
 
 	var result recaptchaV3TaskTaskResult
 	if err := c.resolve(retryTicker.C, timeoutTicker.C, taskId, &result); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
 }
@@ -103,7 +103,7 @@ func (c *capmonsterClient) resolveRecaptchaV2Enterprise(task interface{}, callba
 
 	var result recaptchaV2EnterpriseTaskResult
 	if err := c.resolve(retryTicker.C, timeoutTicker.C, taskId, &result); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
 }
@@ -128,7 +128,7 @@ func (c *capmonsterClient) resolveFunCaptcha(task interface{}, callbackUrl *stri
 
 	var result funCaptchaTaskResult
 	if err := c.resolve(retryTicker.C, timeoutTicker.C, taskId, &result); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
 }
@@ -153,7 +153,7 @@ func (c *capmonsterClient) resolveHCaptcha(task interface{}, callbackUrl *string
 
 	var result hCaptchaTaskResult
 	if err := c.resolve(retryTicker.C, timeoutTicker.C, taskId, &result); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
 }
@@ -178,7 +178,7 @@ func (c *capmonsterClient) resolveGeeTest(task interface{}, callbackUrl *string)
 
 	var result geeTestTaskResult
 	if err := c.resolve(retryTicker.C, timeoutTicker.C, taskId, &result); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
 }
@@ -199,12 +199,12 @@ func (c *capmonsterClient) resolve(retryTickerCh <-chan time.Time, timeoutTicker
 			err := c.getTaskResult(taskId, result)
 			switch {
 			case err != nil:
-				return err
+				return fmt.Errorf("get task result: %w", err)
 			case result.ErrorId != 0 && result.ErrorCode != "CAPTCHA_NOT_READY":
 				if err, ok := errMap[result.ErrorCode]; ok {
-					return err
+					return fmt.Errorf("get task result: %w", err)
 				}
-				return errUnknown
+				return fmt.Errorf("get task result: %w", errUnknown)
 			case result.Status == "ready":
 				return nil
 
