@@ -14,14 +14,11 @@ type NoCaptchaTaskProxyless struct {
 	userAgentAndCookies
 }
 
-func NewNoCaptchaTaskProxyless(websiteURL, websiteKey, userAgent string) NoCaptchaTaskProxyless {
+func NewNoCaptchaTaskProxyless(websiteURL, websiteKey string) NoCaptchaTaskProxyless {
 	return NoCaptchaTaskProxyless{
 		Type:       "NoCaptchaTaskProxyless",
 		WebsiteURL: websiteURL,
 		WebsiteKey: websiteKey,
-		userAgentAndCookies: userAgentAndCookies{
-			UserAgent: &userAgent,
-		},
 	}
 }
 
