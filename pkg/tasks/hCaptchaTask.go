@@ -15,14 +15,11 @@ type HCaptchaTaskProxyless struct {
 	userAgentAndCookies
 }
 
-func NewHCaptchaTaskProxyless(websiteURL, websiteKey, userAgent string) HCaptchaTaskProxyless {
+func NewHCaptchaTaskProxyless(websiteURL, websiteKey string) HCaptchaTaskProxyless {
 	return HCaptchaTaskProxyless{
 		Type:       "HCaptchaTaskProxyless",
 		WebsiteURL: websiteURL,
 		WebsiteKey: websiteKey,
-		userAgentAndCookies: userAgentAndCookies{
-			UserAgent: &userAgent,
-		},
 	}
 }
 
