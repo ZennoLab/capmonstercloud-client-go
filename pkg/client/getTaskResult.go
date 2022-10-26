@@ -10,10 +10,28 @@ import (
 	"github.com/tandem97/capmonstercloud-client-go/pkg/tasks"
 )
 
+type resulter interface {
+	getErrorId() int
+	getErrorCode() string
+	getStatus() string
+}
+
 type result struct {
 	ErrorId   int    `json:"errorId"`
 	ErrorCode string `json:"errorCode"`
 	Status    string `json:"status"`
+}
+
+func (r result) getErrorId() int {
+	return r.ErrorId
+}
+
+func (r result) getErrorCode() string {
+	return r.ErrorCode
+}
+
+func (r result) getStatus() string {
+	return r.Status
 }
 
 type funCaptchaTaskResult struct {
