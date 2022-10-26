@@ -82,7 +82,7 @@ func (c *capmonsterClient) getTaskResult(taskId int, result interface{}) error {
 		return errServiceServiceUnavailable
 	}
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
-		return fmt.Errorf("responce status code: %v", resp.StatusCode)
+		return fmt.Errorf("response status code: %v", resp.StatusCode)
 	}
 
 	respBody, err := io.ReadAll(resp.Body)
@@ -90,7 +90,7 @@ func (c *capmonsterClient) getTaskResult(taskId int, result interface{}) error {
 		return fmt.Errorf("read response body: %w", err)
 	}
 
-	if err := json.Unmarshal(respBody, result); err != nil {
+	if err := json.Unmarshal(respBody, &result); err != nil {
 		return fmt.Errorf("unmarshal responce payload: %w", err)
 	}
 
