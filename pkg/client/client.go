@@ -12,6 +12,7 @@ const (
 	getBalanceUrl    = "https://api.capmonster.cloud/getBalance"
 	createTaskUrl    = "https://api.capmonster.cloud/createTask"
 	getTaskResultUrl = "https://api.capmonster.cloud/getTaskResult/"
+	softId           = 58
 )
 
 type capmonsterClient struct {

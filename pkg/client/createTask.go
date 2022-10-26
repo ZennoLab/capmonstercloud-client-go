@@ -9,6 +9,7 @@ import (
 )
 
 type createTaskRequestPayload struct {
+	SoftId      int         `json:"softId"`
 	ClientKey   string      `json:"clientKey"`
 	Task        interface{} `json:"task"`
 	CallbackUrl *string     `json:"callbackUrl,omitempty"`
@@ -22,6 +23,7 @@ type createTaskRequestResponsePayload struct {
 
 func (c *capmonsterClient) createTask(task interface{}, callbackUrl *string) (int, error) {
 	body, err := json.Marshal(createTaskRequestPayload{
+		SoftId:      softId,
 		ClientKey:   c.clientKey,
 		Task:        task,
 		CallbackUrl: callbackUrl,
