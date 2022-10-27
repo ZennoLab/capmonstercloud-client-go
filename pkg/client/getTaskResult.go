@@ -10,12 +10,6 @@ import (
 	"github.com/tandem97/capmonstercloud-client-go/pkg/tasks"
 )
 
-type resulter interface {
-	getErrorId() int
-	getErrorCode() string
-	getStatus() string
-}
-
 type result struct {
 	ErrorId   int    `json:"errorId"`
 	ErrorCode string `json:"errorCode"`
