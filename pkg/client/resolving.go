@@ -2,6 +2,7 @@ package client
 
 import (
 	"fmt"
+	"sync"
 	"time"
 
 	"github.com/tandem97/capmonstercloud-client-go/pkg/tasks"
@@ -17,7 +18,7 @@ type validater interface {
 	Validate() error
 }
 
-func (c *capmonsterClient) resolve(task validater, callbackUrl *string, timings resolveCapTimings, taskResult resulter) error {
+func (c *capmonsterClient) resolve(task validater, callbackUrl *string, timings resolveCapTimings, noCache bool, taskResult resulter) error {
 	if err := task.Validate(); err != nil {
 		return fmt.Errorf("validate: %w", err)
 	}
@@ -27,13 +28,22 @@ func (c *capmonsterClient) resolve(task validater, callbackUrl *string, timings 
 		return fmt.Errorf("create task: %w", err)
 	}
 
-	time.Sleep(timings.firstRequestDelay)
-	retryTicker := time.NewTicker(timings.requestsInterval)
 	timeoutTicker := time.NewTicker(timings.timeout)
+	var retryTicker *time.Ticker
+	if noCache {
+		retryTicker = time.NewTicker(timings.firstRequestNoCacheDelay)
+	} else {
+		retryTicker = time.NewTicker(timings.firstRequestDelay)
+	}
+	defer retryTicker.Stop()
+	defer timeoutTicker.Stop()
+
+	var setTickerForRetries sync.Once
 
 	for {
 		select {
 		case <-retryTicker.C:
+			setTickerForRetries.Do(func() { retryTicker.Reset(timings.requestsInterval) })
 			err := c.getTaskResult(taskId, taskResult)
 			switch {
 			case err != nil:
@@ -58,79 +68,79 @@ func (c *capmonsterClient) resolve(task validater, callbackUrl *string, timings 
 
 func (c *capmonsterClient) ResolveImageToText(task tasks.ImageToTextTask, callbackUrl *string) (*tasks.ImageToTextTaskSolution, error) {
 	var result imageToTextTaskResult
-	if err := c.resolve(task, callbackUrl, imageToTextTimings, &result); err != nil {
+	if err := c.resolve(task, callbackUrl, imageToTextTimings, false, &result); err != nil {
 		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
 }
 
-func (c *capmonsterClient) ResolveNoCaptcha(task tasks.NoCaptchaTask, callbackUrl *string) (*tasks.NoCaptchaTaskSolution, error) {
+func (c *capmonsterClient) ResolveNoCaptcha(task tasks.NoCaptchaTask, noCache bool, callbackUrl *string) (*tasks.NoCaptchaTaskSolution, error) {
 	var result noCaptchaTaskResult
-	if err := c.resolve(task, callbackUrl, noCaptchaTaskTimings, &result); err != nil {
+	if err := c.resolve(task, callbackUrl, noCaptchaTaskTimings, noCache, &result); err != nil {
 		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
 }
 
-func (c *capmonsterClient) ResolveNoCaptchaProxyless(task tasks.NoCaptchaTaskProxyless, callbackUrl *string) (*tasks.NoCaptchaTaskSolution, error) {
+func (c *capmonsterClient) ResolveNoCaptchaProxyless(task tasks.NoCaptchaTaskProxyless, noCache bool, callbackUrl *string) (*tasks.NoCaptchaTaskSolution, error) {
 	var result noCaptchaTaskResult
-	if err := c.resolve(task, callbackUrl, noCaptchaTaskTimings, &result); err != nil {
+	if err := c.resolve(task, callbackUrl, noCaptchaTaskTimings, noCache, &result); err != nil {
 		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
 }
 
-func (c *capmonsterClient) ResolveRecaptchaV3Proxyless(task tasks.RecaptchaV3TaskProxyless, callbackUrl *string) (*tasks.RecaptchaV3TaskTaskSolution, error) {
+func (c *capmonsterClient) ResolveRecaptchaV3Proxyless(task tasks.RecaptchaV3TaskProxyless, noCache bool, callbackUrl *string) (*tasks.RecaptchaV3TaskTaskSolution, error) {
 	var result recaptchaV3TaskTaskResult
-	if err := c.resolve(task, callbackUrl, recaptchaV3Timings, &result); err != nil {
+	if err := c.resolve(task, callbackUrl, recaptchaV3Timings, noCache, &result); err != nil {
 		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
 }
 
-func (c *capmonsterClient) ResolveRecaptchaV2Enterprise(task tasks.RecaptchaV2EnterpriseTask, callbackUrl *string) (*tasks.RecaptchaV2EnterpriseTaskSolution, error) {
+func (c *capmonsterClient) ResolveRecaptchaV2Enterprise(task tasks.RecaptchaV2EnterpriseTask, noCache bool, callbackUrl *string) (*tasks.RecaptchaV2EnterpriseTaskSolution, error) {
 	var result recaptchaV2EnterpriseTaskResult
-	if err := c.resolve(task, callbackUrl, recaptchaV2EnterpriseTimings, &result); err != nil {
+	if err := c.resolve(task, callbackUrl, recaptchaV2EnterpriseTimings, noCache, &result); err != nil {
 		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
 }
 
-func (c *capmonsterClient) ResolveRecaptchaV2EnterpriseProxyless(task tasks.RecaptchaV2EnterpriseTaskProxyless, callbackUrl *string) (*tasks.RecaptchaV2EnterpriseTaskSolution, error) {
+func (c *capmonsterClient) ResolveRecaptchaV2EnterpriseProxyless(task tasks.RecaptchaV2EnterpriseTaskProxyless, noCache bool, callbackUrl *string) (*tasks.RecaptchaV2EnterpriseTaskSolution, error) {
 	var result recaptchaV2EnterpriseTaskResult
-	if err := c.resolve(task, callbackUrl, recaptchaV2EnterpriseTimings, &result); err != nil {
+	if err := c.resolve(task, callbackUrl, recaptchaV2EnterpriseTimings, noCache, &result); err != nil {
 		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
 }
 
-func (c *capmonsterClient) ResolveFunCaptcha(task tasks.FunCaptchaTask, callbackUrl *string) (*tasks.FunCaptchaTaskSolution, error) {
+func (c *capmonsterClient) ResolveFunCaptcha(task tasks.FunCaptchaTask, noCache bool, callbackUrl *string) (*tasks.FunCaptchaTaskSolution, error) {
 	var result funCaptchaTaskResult
-	if err := c.resolve(task, callbackUrl, funCaptchaTimings, &result); err != nil {
+	if err := c.resolve(task, callbackUrl, funCaptchaTimings, noCache, &result); err != nil {
 		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
 }
 
-func (c *capmonsterClient) ResolveFunCaptchaProxyless(task tasks.FunCaptchaTaskProxyless, callbackUrl *string) (*tasks.FunCaptchaTaskSolution, error) {
+func (c *capmonsterClient) ResolveFunCaptchaProxyless(task tasks.FunCaptchaTaskProxyless, noCache bool, callbackUrl *string) (*tasks.FunCaptchaTaskSolution, error) {
 	var result funCaptchaTaskResult
-	if err := c.resolve(task, callbackUrl, funCaptchaTimings, &result); err != nil {
+	if err := c.resolve(task, callbackUrl, funCaptchaTimings, noCache, &result); err != nil {
 		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
 }
 
-func (c *capmonsterClient) ResolveHCaptcha(task tasks.HCaptchaTask, callbackUrl *string) (*tasks.HCaptchaTaskSolution, error) {
+func (c *capmonsterClient) ResolveHCaptcha(task tasks.HCaptchaTask, noCache bool, callbackUrl *string) (*tasks.HCaptchaTaskSolution, error) {
 	var result hCaptchaTaskResult
-	if err := c.resolve(task, callbackUrl, hCaptchaTimings, &result); err != nil {
+	if err := c.resolve(task, callbackUrl, hCaptchaTimings, noCache, &result); err != nil {
 		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
 }
 
-func (c *capmonsterClient) ResolveHCaptchaProxyless(task tasks.HCaptchaTaskProxyless, callbackUrl *string) (*tasks.HCaptchaTaskSolution, error) {
+func (c *capmonsterClient) ResolveHCaptchaProxyless(task tasks.HCaptchaTaskProxyless, noCache bool, callbackUrl *string) (*tasks.HCaptchaTaskSolution, error) {
 	var result hCaptchaTaskResult
-	if err := c.resolve(task, callbackUrl, hCaptchaTimings, &result); err != nil {
+	if err := c.resolve(task, callbackUrl, hCaptchaTimings, noCache, &result); err != nil {
 		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
@@ -138,7 +148,7 @@ func (c *capmonsterClient) ResolveHCaptchaProxyless(task tasks.HCaptchaTaskProxy
 
 func (c *capmonsterClient) ResolveGeeTest(task tasks.GeeTestTask, callbackUrl *string) (*tasks.GeeTestTaskSolution, error) {
 	var result geeTestTaskResult
-	if err := c.resolve(task, callbackUrl, geeTestTimings, &result); err != nil {
+	if err := c.resolve(task, callbackUrl, geeTestTimings, false, &result); err != nil {
 		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
@@ -146,7 +156,7 @@ func (c *capmonsterClient) ResolveGeeTest(task tasks.GeeTestTask, callbackUrl *s
 
 func (c *capmonsterClient) ResolveGeeTestProxyless(task tasks.GeeTestTaskProxyless, callbackUrl *string) (*tasks.GeeTestTaskSolution, error) {
 	var result geeTestTaskResult
-	if err := c.resolve(task, callbackUrl, geeTestTimings, &result); err != nil {
+	if err := c.resolve(task, callbackUrl, geeTestTimings, false, &result); err != nil {
 		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil
