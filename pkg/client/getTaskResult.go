@@ -7,7 +7,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/tandem97/capmonstercloud-client-go/pkg/tasks"
+	"github.com/ZennoLab/capmonstercloud-client-go/pkg/tasks"
 )
 
 type result struct {
