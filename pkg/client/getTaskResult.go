@@ -48,9 +48,9 @@ type imageToTextTaskResult struct {
 	Solution tasks.ImageToTextTaskSolution `json:"solution"`
 }
 
-type noCaptchaTaskResult struct {
+type recaptchaV2Result struct {
 	result
-	Solution tasks.NoCaptchaTaskSolution `json:"solution"`
+	Solution tasks.RecaptchaV2TaskSolution `json:"solution"`
 }
 
 type recaptchaV3TaskTaskResult struct {

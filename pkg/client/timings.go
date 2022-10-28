@@ -17,7 +17,7 @@ var (
 		timeout:                  10 * time.Second,
 	}
 
-	noCaptchaTaskTimings = resolveCapTimings{
+	recaptchaV2TaskTimings = resolveCapTimings{
 		firstRequestDelay:        1 * time.Second,
 		firstRequestNoCacheDelay: 10 * time.Second,
 		requestsInterval:         3 * time.Second,

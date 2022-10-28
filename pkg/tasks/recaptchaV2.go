@@ -6,7 +6,7 @@ import (
 	"net/url"
 )
 
-type NoCaptchaTaskProxyless struct {
+type RecaptchaV2Proxyless struct {
 	Type                string  `json:"type"`
 	WebsiteURL          string  `json:"websiteURL"`
 	WebsiteKey          string  `json:"websiteKey"`
@@ -14,20 +14,20 @@ type NoCaptchaTaskProxyless struct {
 	userAgentAndCookies
 }
 
-func NewNoCaptchaTaskProxyless(websiteURL, websiteKey string) NoCaptchaTaskProxyless {
-	return NoCaptchaTaskProxyless{
+func NewRecaptchaV2TaskProxyless(websiteURL, websiteKey string) RecaptchaV2Proxyless {
+	return RecaptchaV2Proxyless{
 		Type:       "NoCaptchaTaskProxyless",
 		WebsiteURL: websiteURL,
 		WebsiteKey: websiteKey,
 	}
 }
 
-func (t NoCaptchaTaskProxyless) WithRecaptchaDataSValue(recaptchaDataSValue string) NoCaptchaTaskProxyless {
+func (t RecaptchaV2Proxyless) WithRecaptchaDataSValue(recaptchaDataSValue string) RecaptchaV2Proxyless {
 	t.RecaptchaDataSValue = &recaptchaDataSValue
 	return t
 }
 
-func (t NoCaptchaTaskProxyless) Validate() error {
+func (t RecaptchaV2Proxyless) Validate() error {
 	if _, err := url.ParseRequestURI(t.WebsiteURL); err != nil {
 		return fmt.Errorf("parse WebsiteURL: %w", err)
 	}
@@ -38,14 +38,14 @@ func (t NoCaptchaTaskProxyless) Validate() error {
 	return nil
 }
 
-type NoCaptchaTask struct {
-	NoCaptchaTaskProxyless
+type RecaptchaV2Task struct {
+	RecaptchaV2Proxyless
 	taskProxy
 }
 
-func NewNoCaptchaTask(websiteURL, websiteKey, proxyType, proxyAddress string, proxyPort int) NoCaptchaTask {
-	return NoCaptchaTask{
-		NoCaptchaTaskProxyless: NoCaptchaTaskProxyless{
+func NewRecaptchaV2Task(websiteURL, websiteKey, proxyType, proxyAddress string, proxyPort int) RecaptchaV2Task {
+	return RecaptchaV2Task{
+		RecaptchaV2Proxyless: RecaptchaV2Proxyless{
 			Type:       "NoCaptchaTask",
 			WebsiteURL: websiteURL,
 			WebsiteKey: websiteKey,
@@ -58,8 +58,8 @@ func NewNoCaptchaTask(websiteURL, websiteKey, proxyType, proxyAddress string, pr
 	}
 }
 
-func (t NoCaptchaTask) Validate() error {
-	if err := t.NoCaptchaTaskProxyless.Validate(); err != nil {
+func (t RecaptchaV2Task) Validate() error {
+	if err := t.RecaptchaV2Proxyless.Validate(); err != nil {
 		return err
 	}
 	if err := t.taskProxy.validate(); err != nil {
@@ -68,7 +68,7 @@ func (t NoCaptchaTask) Validate() error {
 	return nil
 }
 
-type NoCaptchaTaskSolution struct {
+type RecaptchaV2TaskSolution struct {
 	GRecaptchaResponse string            `json:"gRecaptchaResponse"`
 	Cookies            map[string]string `json:"cookies"`
 }
