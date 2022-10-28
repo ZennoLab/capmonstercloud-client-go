@@ -91,7 +91,7 @@ func (c *capmonsterClient) getTaskResult(taskId int, result interface{}) error {
 	defer resp.Body.Close()
 
 	if resp.StatusCode == http.StatusServiceUnavailable {
-		return errServiceServiceUnavailable
+		return errServiceUnavailable
 	}
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
 		return fmt.Errorf("response status code: %v", resp.StatusCode)

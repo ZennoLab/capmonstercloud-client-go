@@ -47,7 +47,7 @@ func (c *capmonsterClient) resolve(task validater, callbackUrl *string, timings 
 			err := c.getTaskResult(taskId, taskResult)
 			switch {
 			case err != nil:
-				if err == errServiceServiceUnavailable {
+				if err == errServiceUnavailable {
 					continue
 				}
 				return fmt.Errorf("get task result: %w", err)
