@@ -12,6 +12,12 @@ const (
 	softId           = 58
 )
 
+var (
+	reqHeaders = map[string][]string{
+		"UserAgent": {"Zennolab.CapMonsterCloud.Client.Go/{version}"},
+	}
+)
+
 type capmonsterClient struct {
 	httpClient http.Client
 	clientKey  string

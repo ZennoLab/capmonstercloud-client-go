@@ -37,7 +37,7 @@ func (c *capmonsterClient) createTask(task interface{}, callbackUrl *string) (in
 	if err != nil {
 		return 0, fmt.Errorf("create http request: %w", err)
 	}
-	req.Header.Add("UserAgent", "Zennolab.CapMonsterCloud.Client/0.0.1")
+	req.Header = reqHeaders
 
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
