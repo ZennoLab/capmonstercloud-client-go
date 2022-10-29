@@ -1,3 +1,7 @@
+# Zennolab.CapMonsterCloud.Client
+
+Official Go client library for [capmonster.cloud](https://capmonster.cloud/) captcha recognition service
+
 ## Usage
 ```go
 package main
@@ -40,3 +44,17 @@ func main() {
 	}
 }
 ```
+Supported captcha recognition requests:
+
+- FunCaptchaTask
+- FunCaptchaTaskProxyless
+- GeeTestTask
+- GeeTestTaskProxyless
+- HCaptchaTask
+- HCaptchaTaskProxyless
+- ImageToTextTask
+- RecaptchaV2Task
+- RecaptchaV2TaskProxyless
+- RecaptchaV3TaskProxyless
+- RecaptchaV2EnterpriseTask
+- RecaptchaV2EnterpriseTaskProxyless
