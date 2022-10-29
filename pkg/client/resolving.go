@@ -82,7 +82,7 @@ func (c *capmonsterClient) ResolveRecaptchaV2(task tasks.RecaptchaV2Task, noCach
 	return &result.Solution, nil
 }
 
-func (c *capmonsterClient) ResolveRecaptchaV2Proxyless(task tasks.RecaptchaV2Proxyless, noCache bool, callbackUrl *string) (*tasks.RecaptchaV2TaskSolution, error) {
+func (c *capmonsterClient) ResolveRecaptchaV2Proxyless(task tasks.RecaptchaV2TaskProxyless, noCache bool, callbackUrl *string) (*tasks.RecaptchaV2TaskSolution, error) {
 	var result recaptchaV2Result
 	if err := c.resolve(task, callbackUrl, recaptchaV2TaskTimings, noCache, &result); err != nil {
 		return nil, fmt.Errorf("resolve: %w", err)

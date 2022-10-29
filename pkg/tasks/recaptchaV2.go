@@ -6,7 +6,7 @@ import (
 	"net/url"
 )
 
-type RecaptchaV2Proxyless struct {
+type RecaptchaV2TaskProxyless struct {
 	Type                string  `json:"type"`
 	WebsiteURL          string  `json:"websiteURL"`
 	WebsiteKey          string  `json:"websiteKey"`
@@ -14,20 +14,20 @@ type RecaptchaV2Proxyless struct {
 	userAgentAndCookies
 }
 
-func NewRecaptchaV2TaskProxyless(websiteURL, websiteKey string) RecaptchaV2Proxyless {
-	return RecaptchaV2Proxyless{
+func NewRecaptchaV2TaskProxyless(websiteURL, websiteKey string) RecaptchaV2TaskProxyless {
+	return RecaptchaV2TaskProxyless{
 		Type:       "NoCaptchaTaskProxyless",
 		WebsiteURL: websiteURL,
 		WebsiteKey: websiteKey,
 	}
 }
 
-func (t RecaptchaV2Proxyless) WithRecaptchaDataSValue(recaptchaDataSValue string) RecaptchaV2Proxyless {
+func (t RecaptchaV2TaskProxyless) WithRecaptchaDataSValue(recaptchaDataSValue string) RecaptchaV2TaskProxyless {
 	t.RecaptchaDataSValue = &recaptchaDataSValue
 	return t
 }
 
-func (t RecaptchaV2Proxyless) Validate() error {
+func (t RecaptchaV2TaskProxyless) Validate() error {
 	if _, err := url.ParseRequestURI(t.WebsiteURL); err != nil {
 		return fmt.Errorf("parse WebsiteURL: %w", err)
 	}
@@ -39,13 +39,13 @@ func (t RecaptchaV2Proxyless) Validate() error {
 }
 
 type RecaptchaV2Task struct {
-	RecaptchaV2Proxyless
+	RecaptchaV2TaskProxyless
 	taskProxy
 }
 
 func NewRecaptchaV2Task(websiteURL, websiteKey, proxyType, proxyAddress string, proxyPort int) RecaptchaV2Task {
 	return RecaptchaV2Task{
-		RecaptchaV2Proxyless: RecaptchaV2Proxyless{
+		RecaptchaV2TaskProxyless: RecaptchaV2TaskProxyless{
 			Type:       "NoCaptchaTask",
 			WebsiteURL: websiteURL,
 			WebsiteKey: websiteKey,
@@ -59,7 +59,7 @@ func NewRecaptchaV2Task(websiteURL, websiteKey, proxyType, proxyAddress string, 
 }
 
 func (t RecaptchaV2Task) Validate() error {
-	if err := t.RecaptchaV2Proxyless.Validate(); err != nil {
+	if err := t.RecaptchaV2TaskProxyless.Validate(); err != nil {
 		return err
 	}
 	if err := t.taskProxy.validate(); err != nil {
