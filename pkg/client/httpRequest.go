@@ -25,7 +25,7 @@ func (c *capmonsterClient) invokeRequest(body []byte, url string) ([]byte, error
 		return []byte{}, errServiceUnavailable
 	}
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
-		return []byte{}, fmt.Errorf("responce status code: %v", resp.StatusCode)
+		return []byte{}, fmt.Errorf("response status code: %v", resp.StatusCode)
 	}
 
 	respBody, err := io.ReadAll(resp.Body)
