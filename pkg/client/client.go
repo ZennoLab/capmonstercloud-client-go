@@ -10,6 +10,8 @@ const (
 	createTaskUrl    = "https://api.capmonster.cloud/createTask"
 	getTaskResultUrl = "https://api.capmonster.cloud/getTaskResult/"
 	softId           = 58
+
+	testingKeyEnvVarName = "CAPMONSTERCLOUD_CLIENTKEY"
 )
 
 var (
