@@ -29,7 +29,7 @@ func main() {
 		"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
 	)
 	noCache := false
-	if result, err := client.ResolveRecaptchaV2Proxyless(recaptchaV2Task, noCache, nil); err != nil {
+	if result, err := client.SolveRecaptchaV2Proxyless(recaptchaV2Task, noCache, nil); err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println(result)
@@ -37,7 +37,7 @@ func main() {
 
 	// solve ImageToTextTask with module
 	imgToTextTask := tasks.NewImageToTextTask("BODY").WithCapMonsterModule(tasks.CapMonsterModuleGoogle)
-	if result, err := client.ResolveImageToText(imgToTextTask, nil); err != nil {
+	if result, err := client.SolveImageToText(imgToTextTask, nil); err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println(result)
