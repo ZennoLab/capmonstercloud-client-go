@@ -1,7 +1,6 @@
 package tasks
 
 import (
-	"fmt"
 	"math"
 	"net/url"
 )
@@ -29,11 +28,11 @@ func (t RecaptchaV2TaskProxyless) WithRecaptchaDataSValue(recaptchaDataSValue st
 
 func (t RecaptchaV2TaskProxyless) Validate() error {
 	if _, err := url.ParseRequestURI(t.WebsiteURL); err != nil {
-		return fmt.Errorf("parse WebsiteURL: %w", err)
+		return ErrInvalidWebsiteUrl
 	}
 
 	if len(t.WebsiteKey) < 1 || len(t.WebsiteKey) > math.MaxInt {
-		return fmt.Errorf("WebsiteKey len error")
+		return ErrInvalidWebSiteKey
 	}
 	return nil
 }

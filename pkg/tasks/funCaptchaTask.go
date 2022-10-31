@@ -1,7 +1,6 @@
 package tasks
 
 import (
-	"fmt"
 	"math"
 	"net/url"
 )
@@ -34,10 +33,10 @@ func (t FunCaptchaTaskProxyless) WithData(data string) FunCaptchaTaskProxyless {
 
 func (t FunCaptchaTaskProxyless) Validate() error {
 	if _, err := url.ParseRequestURI(t.WebsiteURL); err != nil {
-		return fmt.Errorf("parse WebsiteURL: %w", err)
+		return ErrInvalidWebsiteUrl
 	}
 	if len(t.WebsitePublicKey) < 1 || len(t.WebsitePublicKey) > math.MaxInt {
-		return fmt.Errorf("WebsitePublicKey len error")
+		return ErrInvalidWebSiteKey
 	}
 	return nil
 }

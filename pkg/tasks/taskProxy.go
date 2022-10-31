@@ -1,7 +1,5 @@
 package tasks
 
-import "fmt"
-
 type taskProxy struct {
 	ProxyType     string  `json:"proxyType"`
 	ProxyAddress  string  `json:"proxyAddress"`
@@ -22,7 +20,7 @@ func (t taskProxy) WithProxyPassword(proxyPassword string) taskProxy {
 
 func (t taskProxy) validate() error {
 	if t.ProxyPort < 0 || t.ProxyPort > 65535 {
-		return fmt.Errorf("invalid port")
+		return ErrInvalidProxyPort
 	}
 	return nil
 }

@@ -1,7 +1,6 @@
 package tasks
 
 import (
-	"fmt"
 	"math"
 	"net/url"
 )
@@ -35,15 +34,15 @@ func (t HCaptchaTaskProxyless) WithData(data string) HCaptchaTaskProxyless {
 
 func (t HCaptchaTaskProxyless) Validate() error {
 	if _, err := url.ParseRequestURI(t.WebsiteURL); err != nil {
-		return fmt.Errorf("parse WebsiteURL: %w", err)
+		return ErrInvalidWebsiteUrl
 	}
 
 	if len(t.WebsiteKey) < 1 || len(t.WebsiteKey) > math.MaxInt {
-		return fmt.Errorf("WebsiteKey len error")
+		return ErrInvalidWebSiteKey
 	}
 
 	if t.Data != nil && t.UserAgent == nil {
-		return fmt.Errorf("UserAgent required")
+		return ErrUserAgentRequired
 	}
 	return nil
 }

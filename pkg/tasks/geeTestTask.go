@@ -1,7 +1,6 @@
 package tasks
 
 import (
-	"fmt"
 	"math"
 	"net/url"
 )
@@ -37,10 +36,10 @@ func (t GeeTestTaskProxyless) WithGeetestGetLib(geetestGetLib string) GeeTestTas
 
 func (t GeeTestTaskProxyless) Validate() error {
 	if _, err := url.ParseRequestURI(t.WebsiteURL); err != nil {
-		return fmt.Errorf("parse WebsiteURL: %w", err)
+		return ErrInvalidWebsiteUrl
 	}
 	if len(t.Gt) < 1 || len(t.Gt) > math.MaxInt {
-		return fmt.Errorf("gt len error")
+		return ErrInvalidGt
 	}
 	return nil
 }

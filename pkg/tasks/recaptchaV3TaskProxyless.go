@@ -1,7 +1,6 @@
 package tasks
 
 import (
-	"fmt"
 	"math"
 	"net/url"
 )
@@ -30,15 +29,15 @@ func (t RecaptchaV3TaskProxyless) WithPageAction(pageAction string) RecaptchaV3T
 
 func (t RecaptchaV3TaskProxyless) Validate() error {
 	if _, err := url.ParseRequestURI(t.WebsiteURL); err != nil {
-		return fmt.Errorf("parse WebsiteURL: %w", err)
+		return ErrInvalidWebsiteUrl
 	}
 
 	if len(t.WebsiteKey) < 1 || len(t.WebsiteKey) > math.MaxInt {
-		return fmt.Errorf("WebsiteKey len error")
+		return ErrInvalidWebSiteKey
 	}
 
 	if t.MinScore != nil && (*t.MinScore < 0.1 || *t.MinScore > 0.9) {
-		return fmt.Errorf("MinScore is not in [0.1,0.9] range")
+		return ErrInvalidMinScore
 	}
 	return nil
 }
