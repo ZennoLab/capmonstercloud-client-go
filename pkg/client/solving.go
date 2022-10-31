@@ -1,6 +1,7 @@
 package client
 
 import (
+	"errors"
 	"fmt"
 	"sync"
 	"time"
@@ -47,7 +48,7 @@ func (c *capmonsterClient) solve(task validater, callbackUrl *string, timings re
 			err := c.getTaskResult(taskId, taskResult)
 			switch {
 			case err != nil:
-				if err == errServiceUnavailable {
+				if errors.Is(err, errServiceUnavailable) {
 					continue
 				}
 				return fmt.Errorf("get task result: %w", err)

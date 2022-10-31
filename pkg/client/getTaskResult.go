@@ -1,11 +1,8 @@
 package client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
 
 	"github.com/ZennoLab/capmonstercloud-client-go/pkg/tasks"
 )
@@ -77,29 +74,9 @@ func (c *capmonsterClient) getTaskResult(taskId int, result interface{}) error {
 		return fmt.Errorf("marshal payload for request: %w", err)
 	}
 
-	bodyReader := bytes.NewReader(body)
-	req, err := http.NewRequest("POST", getTaskResultUrl, bodyReader)
+	respBody, err := c.invokeRequest(body, getTaskResultUrl)
 	if err != nil {
-		return fmt.Errorf("create http request: %w", err)
-	}
-	req.Header = reqHeaders
-
-	resp, err := c.httpClient.Do(req)
-	if err != nil {
-		return fmt.Errorf("http request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode == http.StatusServiceUnavailable {
-		return errServiceUnavailable
-	}
-	if resp.StatusCode < 200 || resp.StatusCode > 299 {
-		return fmt.Errorf("response status code: %v", resp.StatusCode)
-	}
-
-	respBody, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return fmt.Errorf("read response body: %w", err)
+		return fmt.Errorf("invoke request: %w", err)
 	}
 
 	if err := json.Unmarshal(respBody, &result); err != nil {

@@ -1,11 +1,8 @@
 package client
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
 )
 
 type getBalanceRequestPayload struct {
@@ -24,26 +21,9 @@ func (c *capmonsterClient) GetBalance() (float64, error) {
 		return 0, fmt.Errorf("marshal payload for request: %w", err)
 	}
 
-	bodyReader := bytes.NewReader(body)
-	req, err := http.NewRequest("POST", getBalanceUrl, bodyReader)
+	respBody, err := c.invokeRequest(body, getBalanceUrl)
 	if err != nil {
-		return 0, fmt.Errorf("create http request: %w", err)
-	}
-	req.Header = reqHeaders
-
-	resp, err := c.httpClient.Do(req)
-	if err != nil {
-		return 0, fmt.Errorf("http request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode < 200 || resp.StatusCode > 299 {
-		return 0, fmt.Errorf("responce status code: %v", resp.StatusCode)
-	}
-
-	respBody, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return 0, fmt.Errorf("read response body: %w", err)
+		return 0, fmt.Errorf("invoke request: %w", err)
 	}
 
 	var respPayload getBalanceResponsePayload
