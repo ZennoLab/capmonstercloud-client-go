@@ -24,12 +24,12 @@ func main() {
 	}
 
 	// solve RecaptchaV2 (without proxy)
-	recaptureV2Task := tasks.NewRecaptchaV2TaskProxyless(
+	recaptchaV2Task := tasks.NewRecaptchaV2TaskProxyless(
 		"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
 		"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd",
 	)
 	noCache := false
-	if result, err := client.ResolveRecaptchaV2Proxyless(recaptureV2Task, noCache, nil); err != nil {
+	if result, err := client.ResolveRecaptchaV2Proxyless(recaptchaV2Task, noCache, nil); err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println(result)
