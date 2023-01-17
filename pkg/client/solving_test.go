@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/gachi-lord/capmonstercloud-client-go/pkg/tasks"
+	"github.com/ZennoLab/capmonstercloud-client-go/pkg/tasks"
 )
 
 func TestSolveRecaptchaV2Proxyless(t *testing.T) {
@@ -132,5 +132,18 @@ func TestIncorrectGt(t *testing.T) {
 	_, gotErr := client.SolveGeeTestProxyless(task, nil)
 	if !errors.Is(gotErr, wantErr) {
 		t.Errorf("want %q error, got %q error", wantErr, gotErr)
+	}
+}
+
+func TestTurnstileProxless(t *testing.T) {
+	client := New(os.Getenv(testingKeyEnvVarName))
+	task := tasks.NewTurnstileTaskProxyless(
+		"https://tsinvisble.zlsupport.com",
+		"0x4AAAAAAABUY0VLtOUMAHxE",
+	)
+
+	_, gotErr := client.SolveTurnstileProxyless(task, nil)
+	if gotErr != nil {
+		t.Errorf("got %q error", gotErr)
 	}
 }

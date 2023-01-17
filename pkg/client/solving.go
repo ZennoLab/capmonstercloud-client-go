@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gachi-lord/capmonstercloud-client-go/pkg/tasks"
+	"github.com/ZennoLab/capmonstercloud-client-go/pkg/tasks"
 )
 
 type resulter interface {
@@ -158,6 +158,22 @@ func (c *capmonsterClient) SolveGeeTest(task tasks.GeeTestTask, callbackUrl *str
 func (c *capmonsterClient) SolveGeeTestProxyless(task tasks.GeeTestTaskProxyless, callbackUrl *string) (*tasks.GeeTestTaskSolution, error) {
 	var result geeTestTaskResult
 	if err := c.solve(task, callbackUrl, geeTestTimings, false, &result); err != nil {
+		return nil, fmt.Errorf("resolve: %w", err)
+	}
+	return &result.Solution, nil
+}
+
+func (c *capmonsterClient) SolveTurnstile(task tasks.TurnstileTask, callbackUrl *string) (*tasks.turnstileSolution, error) {
+	var result turnstileTaskResult
+	if err := c.solve(task, callbackUrl, turnstileTimings, false, &result); err != nil {
+		return nil, fmt.Errorf("resolve: %w", err)
+	}
+	return &result.Solution, nil
+}
+
+func (c *capmonsterClient) SolveTurnstileProxyless(task tasks.TurnstileTaskProxyless, callbackUrl *string) (*tasks.turnstileSolution, error) {
+	var result turnstileTaskResult
+	if err := c.solve(task, callbackUrl, turnstileTimings, false, &result); err != nil {
 		return nil, fmt.Errorf("resolve: %w", err)
 	}
 	return &result.Solution, nil

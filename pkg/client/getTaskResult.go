@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/gachi-lord/capmonstercloud-client-go/pkg/tasks"
+	"github.com/ZennoLab/capmonstercloud-client-go/pkg/tasks"
 )
 
 type result struct {
@@ -58,6 +58,11 @@ type recaptchaV3TaskTaskResult struct {
 type recaptchaV2EnterpriseTaskResult struct {
 	result
 	Solution tasks.RecaptchaV2EnterpriseTaskSolution `json:"solution"`
+}
+
+type turnstileTaskResult struct {
+	result
+	Solution tasks.turnstileTaskSolution `json:"solution"`
 }
 
 type getTaskResultPayload struct {
