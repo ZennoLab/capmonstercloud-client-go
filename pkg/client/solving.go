@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ZennoLab/capmonstercloud-client-go/pkg/tasks"
+	"github.com/gachi-lordcapmonstercloud-client-go/pkg/tasks"
 )
 
 type resulter interface {

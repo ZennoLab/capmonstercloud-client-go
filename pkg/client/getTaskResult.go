@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/ZennoLab/capmonstercloud-client-go/pkg/tasks"
+	"github.com/gachi-lordcapmonstercloud-client-go/pkg/tasks"
 )
 
 type result struct {
