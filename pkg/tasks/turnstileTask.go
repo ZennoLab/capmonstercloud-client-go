@@ -60,6 +60,6 @@ func (t TurnstileTask) Validate() error {
 	return nil
 }
 
-type turnstileTaskSolution struct {
+type TurnstileTaskSolution struct {
 	token string `json:"token"`
 }

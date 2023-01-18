@@ -62,7 +62,7 @@ type recaptchaV2EnterpriseTaskResult struct {
 
 type turnstileTaskResult struct {
 	result
-	Solution tasks.turnstileTaskSolution `json:"solution"`
+	Solution tasks.TurnstileTaskSolution `json:"solution"`
 }
 
 type getTaskResultPayload struct {
