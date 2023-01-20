@@ -60,6 +60,11 @@ type recaptchaV2EnterpriseTaskResult struct {
 	Solution tasks.RecaptchaV2EnterpriseTaskSolution `json:"solution"`
 }
 
+type turnstileTaskResult struct {
+	result
+	Solution tasks.TurnstileTaskSolution `json:"solution"`
+}
+
 type getTaskResultPayload struct {
 	ClientKey string `json:"clientKey"`
 	TaskId    int    `json:"taskId"`

@@ -58,4 +58,11 @@ var (
 		requestsInterval:         1 * time.Second,
 		timeout:                  80 * time.Second,
 	}
+
+	turnstileTimings = resolveCapTimings{
+		firstRequestDelay:        1 * time.Second,
+		firstRequestNoCacheDelay: 10 * time.Second,
+		requestsInterval:         1 * time.Second,
+		timeout:                  80 * time.Second,
+	}
 )

@@ -134,3 +134,16 @@ func TestIncorrectGt(t *testing.T) {
 		t.Errorf("want %q error, got %q error", wantErr, gotErr)
 	}
 }
+
+func TestTurnstileProxless(t *testing.T) {
+	client := New(os.Getenv(testingKeyEnvVarName))
+	task := tasks.NewTurnstileTaskProxyless(
+		"https://tsinvisble.zlsupport.com",
+		"0x4AAAAAAABUY0VLtOUMAHxE",
+	)
+
+	_, gotErr := client.SolveTurnstileProxyless(task, nil)
+	if gotErr != nil {
+		t.Errorf("got %q error", gotErr)
+	}
+}

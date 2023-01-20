@@ -162,3 +162,19 @@ func (c *capmonsterClient) SolveGeeTestProxyless(task tasks.GeeTestTaskProxyless
 	}
 	return &result.Solution, nil
 }
+
+func (c *capmonsterClient) SolveTurnstile(task tasks.TurnstileTask, callbackUrl *string) (*tasks.TurnstileTaskSolution, error) {
+	var result turnstileTaskResult
+	if err := c.solve(task, callbackUrl, turnstileTimings, false, &result); err != nil {
+		return nil, fmt.Errorf("resolve: %w", err)
+	}
+	return &result.Solution, nil
+}
+
+func (c *capmonsterClient) SolveTurnstileProxyless(task tasks.TurnstileTaskProxyless, callbackUrl *string) (*tasks.TurnstileTaskSolution, error) {
+	var result turnstileTaskResult
+	if err := c.solve(task, callbackUrl, turnstileTimings, false, &result); err != nil {
+		return nil, fmt.Errorf("resolve: %w", err)
+	}
+	return &result.Solution, nil
+}
