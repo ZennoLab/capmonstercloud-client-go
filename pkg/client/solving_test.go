@@ -147,3 +147,32 @@ func TestTurnstileProxless(t *testing.T) {
 		t.Errorf("got %q error", gotErr)
 	}
 }
+
+func TestRecaptchaComplexImage(t *testing.T) {
+	client := New(os.Getenv(testingKeyEnvVarName))
+	task := tasks.NewRecaptchaComplexImageTask(tasks.MetadataRecaptcha{
+		Grid: "3x3",
+	})
+	task = task.WithImagesUrls([]string{"https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg"})
+	task = task.WithMetadataTask("Click on traffic lights")
+	task = task.WithUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36.")
+
+	_, gotErr := client.SolveRecaptchaComplexImage(task, nil)
+	if gotErr != nil {
+		t.Errorf("got %q error", gotErr)
+	}
+}
+
+func TestHCaptchaComplexImage(t *testing.T) {
+	client := New(os.Getenv(testingKeyEnvVarName))
+	task := tasks.NewHCaptchaComplexImageTask(tasks.MetadataHCaptcha{
+		Task: "Please click each image containing a mountain",
+	})
+	task = task.WithImagesUrls([]string{"https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg"})
+	task = task.WithUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36.")
+
+	_, gotErr := client.SolveHCaptchaComplexImage(task, nil)
+	if gotErr != nil {
+		t.Errorf("got %q error", gotErr)
+	}
+}

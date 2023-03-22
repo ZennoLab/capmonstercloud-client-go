@@ -37,4 +37,6 @@ var (
 	ErrInvalidEnterprisePayload    = errors.New("enterprisePayload len error")
 
 	ErrUserAgentRequired = errors.New("userAgent required")
+
+	ErrMetaData = errors.New("invalid Metadata")
 )

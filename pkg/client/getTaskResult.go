@@ -65,6 +65,11 @@ type turnstileTaskResult struct {
 	Solution tasks.TurnstileTaskSolution `json:"solution"`
 }
 
+type complexImageTaskResult struct {
+	result
+	Solution tasks.ComplexImageTaskSolution `json:"solution"`
+}
+
 type getTaskResultPayload struct {
 	ClientKey string `json:"clientKey"`
 	TaskId    int    `json:"taskId"`
