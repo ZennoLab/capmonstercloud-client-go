@@ -79,5 +79,7 @@ func (t HCaptchaTask) Validate() error {
 
 type HCaptchaTaskSolution struct {
 	GRecaptchaResponse string            `json:"gRecaptchaResponse"`
+	RespKey            string            `json:"respKey"`
+	UserAgent          string            `json:"userAgent"`
 	Cookies            map[string]string `json:"cookies"`
 }
