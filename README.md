@@ -60,3 +60,5 @@ Supported captcha recognition requests:
 - RecaptchaV2EnterpriseTaskProxyless
 - TurnstileTask
 - TurnstileTaskProxyless
+- HCaptchaComplexImageTask
+- RecaptchaComplexImageTask

@@ -178,3 +178,19 @@ func (c *capmonsterClient) SolveTurnstileProxyless(task tasks.TurnstileTaskProxy
 	}
 	return &result.Solution, nil
 }
+
+func (c *capmonsterClient) SolveHCaptchaComplexImage(task tasks.HCaptchaComplexImageTask, callbackUrl *string) (*tasks.ComplexImageTaskSolution, error) {
+	var result complexImageTaskResult
+	if err := c.solve(task, callbackUrl, turnstileTimings, false, &result); err != nil {
+		return nil, fmt.Errorf("resolve: %w", err)
+	}
+	return &result.Solution, nil
+}
+
+func (c *capmonsterClient) SolveRecaptchaComplexImage(task tasks.RecaptchaComplexImageTask, callbackUrl *string) (*tasks.ComplexImageTaskSolution, error) {
+	var result complexImageTaskResult
+	if err := c.solve(task, callbackUrl, turnstileTimings, false, &result); err != nil {
+		return nil, fmt.Errorf("resolve: %w", err)
+	}
+	return &result.Solution, nil
+}
