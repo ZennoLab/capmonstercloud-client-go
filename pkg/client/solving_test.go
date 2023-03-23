@@ -35,6 +35,10 @@ func TestSolveHCaptchaProxyless(t *testing.T) {
 		t.Error(err)
 	case result.GRecaptchaResponse == "":
 		t.Error("empty result")
+	case result.RespKey == "":
+		t.Error("empty result")
+	case result.UserAgent == "":
+		t.Error("empty result")
 	}
 }
 
