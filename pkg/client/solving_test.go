@@ -168,7 +168,7 @@ func TestHCaptchaComplexImage(t *testing.T) {
 	task := tasks.NewHCaptchaComplexImageTask(tasks.MetadataHCaptcha{
 		Task: "Please click each image containing a mountain",
 	})
-	task = task.WithImagesUrls([]string{"https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg"})
+	task = task.WithImagesUrls([]string{"https://i.postimg.cc/kg71cbRt/image-1.jpg"})
 	task = task.WithUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36.")
 
 	_, gotErr := client.SolveHCaptchaComplexImage(task, nil)
