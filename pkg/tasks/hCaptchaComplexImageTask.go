@@ -34,6 +34,11 @@ func (t HCaptchaComplexImageTask) WithWebsiteURL(websiteURL string) HCaptchaComp
 	return t
 }
 
+func (t HCaptchaComplexImageTask) WithMetadataTask(task string) HCaptchaComplexImageTask {
+	t.MetadataHCaptcha.Task = task
+	return t
+}
+
 func (t HCaptchaComplexImageTask) WithUserAgent(userAgent string) HCaptchaComplexImageTask {
 	t.ComplexImageTask.UserAgent = &userAgent
 	return t
