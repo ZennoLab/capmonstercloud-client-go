@@ -194,3 +194,11 @@ func (c *capmonsterClient) SolveRecaptchaComplexImage(task tasks.RecaptchaComple
 	}
 	return &result.Solution, nil
 }
+
+func (c *capmonsterClient) SolveFuncaptchaComplexImage(task tasks.FuncaptchaComplexImageTask, callbackUrl *string) (*tasks.ComplexImageTaskSolution, error) {
+	var result complexImageTaskResult
+	if err := c.solve(task, callbackUrl, turnstileTimings, false, &result); err != nil {
+		return nil, fmt.Errorf("resolve: %w", err)
+	}
+	return &result.Solution, nil
+}

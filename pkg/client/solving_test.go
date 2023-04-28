@@ -180,3 +180,17 @@ func TestHCaptchaComplexImage(t *testing.T) {
 		t.Errorf("got %q error", gotErr)
 	}
 }
+
+func TestFuncaptchaComplexImage(t *testing.T) {
+	client := New("f9dbccccad15946867313c3789d8b4d7")
+	task := tasks.NewFuncaptchaComplexImageTask(tasks.MetadataFuncaptcha{
+		Task: "Pick the image that is the correct way up",
+	})
+	task = task.WithImagesUrls([]string{"https://i.postimg.cc/s2ZDrHXy/fc1.jpg"})
+	task = task.WithUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36.")
+
+	_, gotErr := client.SolveFuncaptchaComplexImage(task, nil)
+	if gotErr != nil {
+		t.Errorf("got %q error", gotErr)
+	}
+}

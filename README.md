@@ -62,3 +62,4 @@ Supported captcha recognition requests:
 - TurnstileTaskProxyless
 - HCaptchaComplexImageTask
 - RecaptchaComplexImageTask
+- FuncaptchaComplexImageTask
