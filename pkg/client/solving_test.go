@@ -186,6 +186,38 @@ func TestTurnstileProxless(t *testing.T) {
 	}
 }
 
+func TestIncorectTurnstileProxlessCloudflare(t *testing.T) {
+	wantErr := tasks.ErrCloudflareTaskType
+	client := New(os.Getenv(testingKeyEnvVarName))
+	task := tasks.NewTurnstileTaskProxyless(
+		"https://tsinvisble.zlsupport.com",
+		"0x4AAAAAAABUY0VLtOUMAHxE",
+	)
+
+	task = task.WithCloudflareTaskType("cloud")
+
+	_, gotErr := client.SolveTurnstileProxyless(task, nil)
+	if !errors.Is(gotErr, wantErr) {
+		t.Errorf("want %q error, got %q error", wantErr, gotErr)
+	}
+}
+
+func TestIncorectTurnstileProxlessCloudflareUserAgent(t *testing.T) {
+	wantErr := tasks.ErrUserAgentRequired
+	client := New(os.Getenv(testingKeyEnvVarName))
+	task := tasks.NewTurnstileTaskProxyless(
+		"https://tsinvisble.zlsupport.com",
+		"0x4AAAAAAABUY0VLtOUMAHxE",
+	)
+
+	task = task.WithCloudflareTaskType("cf_clearance")
+
+	_, gotErr := client.SolveTurnstileProxyless(task, nil)
+	if !errors.Is(gotErr, wantErr) {
+		t.Errorf("want %q error, got %q error", wantErr, gotErr)
+	}
+}
+
 func TestRecaptchaComplexImage(t *testing.T) {
 	client := New(os.Getenv(testingKeyEnvVarName))
 	task := tasks.NewRecaptchaComplexImageTask(tasks.MetadataRecaptcha{
