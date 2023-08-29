@@ -1,7 +1,8 @@
 name: auto_tagger
 on:
-  pull_request:
+  pull_request_target:
     types: [closed]
+    branch: main
 jobs:
   build:
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
