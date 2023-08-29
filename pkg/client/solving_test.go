@@ -132,7 +132,7 @@ func TestIncorrectGt(t *testing.T) {
 		"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
 		"",
 	)
-	//task = task.WithChallenge("d93591bdf7860e1e4ee2fca799911215")
+	task = task.WithChallenge("d93591bdf7860e1e4ee2fca799911215")
 	_, gotErr := client.SolveGeeTestProxyless(task, nil)
 	if !errors.Is(gotErr, wantErr) {
 		t.Errorf("want %q error, got %q error", wantErr, gotErr)
