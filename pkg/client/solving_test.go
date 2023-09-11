@@ -131,11 +131,45 @@ func TestIncorrectGt(t *testing.T) {
 	task := tasks.NewGeeTestTaskProxyless(
 		"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high",
 		"",
-		"",
+	)
+	task = task.WithChallenge("d93591bdf7860e1e4ee2fca799911215")
+	_, gotErr := client.SolveGeeTestProxyless(task, nil)
+	if !errors.Is(gotErr, wantErr) {
+		t.Errorf("want %q error, got %q error", wantErr, gotErr)
+	}
+}
+
+func TestIncorrectGeeTestV3(t *testing.T) {
+	wantErr := tasks.ErrChallenge
+
+	client := New(os.Getenv(testingKeyEnvVarName))
+	task := tasks.NewGeeTestTaskProxyless(
+		"https://example.com/geetest.php",
+		"81dc9bdb52d04dc20036dbd8313ed055",
 	)
 	_, gotErr := client.SolveGeeTestProxyless(task, nil)
 	if !errors.Is(gotErr, wantErr) {
 		t.Errorf("want %q error, got %q error", wantErr, gotErr)
+	}
+}
+
+func TestGeeTestV4(t *testing.T) {
+	client := New(os.Getenv(testingKeyEnvVarName))
+	task := tasks.NewGeeTestTaskProxyless(
+		"https://faucetpay.io/account/login",
+		"eb8b0c2b27f3365b9244d9da81638c6",
+	)
+	task = task.WithVersion(4)
+
+	task = task.WithInitParametres(struct {
+		RiskType string `json:"riskType"`
+	}{
+		RiskType: "slide",
+	})
+
+	_, gotErr := client.SolveGeeTestProxyless(task, nil)
+	if gotErr != nil {
+		t.Errorf("got %q error", gotErr)
 	}
 }
 
@@ -149,6 +183,38 @@ func TestTurnstileProxless(t *testing.T) {
 	_, gotErr := client.SolveTurnstileProxyless(task, nil)
 	if gotErr != nil {
 		t.Errorf("got %q error", gotErr)
+	}
+}
+
+func TestIncorectTurnstileProxlessCloudflare(t *testing.T) {
+	wantErr := tasks.ErrCloudflareTaskType
+	client := New(os.Getenv(testingKeyEnvVarName))
+	task := tasks.NewTurnstileTaskProxyless(
+		"https://tsinvisble.zlsupport.com",
+		"0x4AAAAAAABUY0VLtOUMAHxE",
+	)
+
+	task = task.WithCloudflareTaskType("cloud")
+
+	_, gotErr := client.SolveTurnstileProxyless(task, nil)
+	if !errors.Is(gotErr, wantErr) {
+		t.Errorf("want %q error, got %q error", wantErr, gotErr)
+	}
+}
+
+func TestIncorectTurnstileProxlessCloudflareUserAgent(t *testing.T) {
+	wantErr := tasks.ErrUserAgentRequired
+	client := New(os.Getenv(testingKeyEnvVarName))
+	task := tasks.NewTurnstileTaskProxyless(
+		"https://tsinvisble.zlsupport.com",
+		"0x4AAAAAAABUY0VLtOUMAHxE",
+	)
+
+	task = task.WithCloudflareTaskType("cf_clearance")
+
+	_, gotErr := client.SolveTurnstileProxyless(task, nil)
+	if !errors.Is(gotErr, wantErr) {
+		t.Errorf("want %q error, got %q error", wantErr, gotErr)
 	}
 }
 

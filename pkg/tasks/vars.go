@@ -39,4 +39,12 @@ var (
 	ErrUserAgentRequired = errors.New("userAgent required")
 
 	ErrMetaData = errors.New("invalid Metadata")
+
+	ErrChallenge = errors.New("challenge required")
+
+	ErrCloudflareTaskType       = errors.New("value can be cf_clearance or token")
+	ErrCloudflareHtmlPageBase64 = errors.New("htmlPageBase64 required")
+	ErrCloudflarePageAction     = errors.New("pageAction required")
+	ErrCloudflareData           = errors.New("data required")
+	ErrCloudflarePageData       = errors.New("pageData required")
 )
