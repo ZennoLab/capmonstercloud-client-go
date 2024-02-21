@@ -46,20 +46,12 @@ func main() {
 ```
 Supported captcha recognition requests:
 
-- FunCaptchaTask
-- FunCaptchaTaskProxyless
-- GeeTestTask
-- GeeTestTaskProxyless
-- HCaptchaTask
-- HCaptchaTaskProxyless
-- ImageToTextTask
-- RecaptchaV2Task
-- RecaptchaV2TaskProxyless
-- RecaptchaV3TaskProxyless
-- RecaptchaV2EnterpriseTask
-- RecaptchaV2EnterpriseTaskProxyless
-- TurnstileTask
-- TurnstileTaskProxyless
-- HCaptchaComplexImageTask
-- RecaptchaComplexImageTask
-- FuncaptchaComplexImageTask
+- [RecaptchaV2Task](https://zenno.link/doc-recaptcha2-en)
+- [RecaptchaV3TaskProxyless](https://zenno.link/doc-recaptcha3-en)
+- [ReCaptchaV2EnterpriseTask](https://zenno.link/doc-recaptcha2e-en)
+- [HCaptchaTask](https://zenno.link/doc-hcaptcha-en)
+- [GeeTestTask](https://zenno.link/doc-geetest-en)
+- [TurnstileTask](https://zenno.link/doc-turnstile-en)
+- [ComplexImageTask Recaptcha](https://zenno.link/doc-complextask-rc-en)
+- [ComplexImageTask HCaptcha](https://zenno.link/doc-complextask-hc-en)
+- [ImageToTextTask](https://zenno.link/doc-ImageToTextTask-en)
