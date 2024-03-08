@@ -129,5 +129,5 @@ func (t TurnstileTask) Validate() error {
 }
 
 type TurnstileTaskSolution struct {
-	token string `json:"token"`
+	Token string `json:"token"`
 }
